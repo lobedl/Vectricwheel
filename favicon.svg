@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Outer Wheel Rim -->
+  <circle cx="32" cy="32" r="30" fill="#1e1b4b" filter="url(#shadow)"/>
+  <circle cx="32" cy="32" r="28" fill="#ffffff"/>
+  
+  <!-- 8 Wheel Slices -->
+  <!-- 1: 0 - 45 deg -->
+  <path d="M32 32 L58 32 A26 26 0 0 1 50.38 50.38 Z" fill="#ef4444"/>
+  <!-- 2: 45 - 90 deg -->
+  <path d="M32 32 L50.38 50.38 A26 26 0 0 1 32 58 Z" fill="#f97316"/>
+  <!-- 3: 90 - 135 deg -->
+  <path d="M32 32 L32 58 A26 26 0 0 1 13.62 50.38 Z" fill="#facc15"/>
+  <!-- 4: 135 - 180 deg -->
+  <path d="M32 32 L13.62 50.38 A26 26 0 0 1 6 32 Z" fill="#22c55e"/>
+  <!-- 5: 180 - 225 deg -->
+  <path d="M32 32 L6 32 A26 26 0 0 1 13.62 13.62 Z" fill="#06b6d4"/>
+  <!-- 6: 225 - 270 deg -->
+  <path d="M32 32 L13.62 13.62 A26 26 0 0 1 32 6 Z" fill="#3b82f6"/>
+  <!-- 7: 270 - 315 deg -->
+  <path d="M32 32 L32 6 A26 26 0 0 1 50.38 13.62 Z" fill="#8b5cf6"/>
+  <!-- 8: 315 - 360 deg -->
+  <path d="M32 32 L50.38 13.62 A26 26 0 0 1 58 32 Z" fill="#ec4899"/>
+
+  <!-- Center Hub -->
+  <circle cx="32" cy="32" r="7" fill="#ffffff" filter="url(#shadow)"/>
+  <circle cx="32" cy="32" r="4" fill="#312e81"/>
+
+  <!-- Top Pointer (12 o'clock) -->
+  <polygon points="32,12 27,2 37,2" fill="#e11d48" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

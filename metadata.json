@@ -1,0 +1,6 @@
+{
+  "name": "Spin the Wheel – Random Decision Maker",
+  "description": "Free online spin the wheel tool. Make random decisions, pick names, play games, and more. Fast, responsive, and easy to use.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
