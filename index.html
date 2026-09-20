@@ -47,7 +47,7 @@
       "@id":"https://vectric.online/#faq",
       "mainEntity":[
         {"@type":"Question","name":"Is the vectricSpin outcome truly random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias."}},
-        {"@type":"Question","name":"How long does a vectricSpin last?","acceptedAnswer":{"@type":"Answer","text":"Each spin runs between 15 and 30 seconds, chosen randomly each time. The wheel decelerates smoothly like a real physical wheel, so the slowdown is gradual and suspenseful."}},
+        {"@type":"Question","name":"How long does a vectricSpin last?","acceptedAnswer":{"@type":"Answer","text":"Each spin runs for about 8 to 10 seconds, chosen randomly each time. The wheel decelerates smoothly and eases into the final answer."}},
         {"@type":"Question","name":"Can I spin without clicking the button?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tap the wheel directly, flick it on a touchscreen, click the center hub, or press the Spacebar."}},
         {"@type":"Question","name":"Are my options saved?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your list is stored locally on your device using HTML5 localStorage. Nothing is uploaded to a server."}},
         {"@type":"Question","name":"Is vectricSpin free?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is completely free with unlimited spins and no account required."}}
@@ -280,18 +280,19 @@ kbd{
   margin-bottom:10px;
 }
 .ad-label{
-  font-size:.62rem;font-weight:800;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gray-500);
+  font-size:.66rem;font-weight:900;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--black);
   display:inline-flex;align-items:center;gap:6px;
+  background:var(--yellow);border:1.5px solid var(--black);
+  border-radius:999px;padding:4px 10px;
 }
 .ad-label::before{
-  content:"";display:inline-block;width:6px;height:6px;
-  background:var(--yellow);border-radius:50%;
-  box-shadow:0 0 0 2px var(--yellow-soft);
+  content:"";display:inline-block;width:7px;height:7px;
+  background:var(--black);border-radius:50%;
 }
 .ad-hint{
-  font-size:.62rem;font-weight:600;letter-spacing:.08em;
-  color:var(--gray-300);text-transform:uppercase;
+  font-size:.64rem;font-weight:800;letter-spacing:.08em;
+  color:var(--gray-700);text-transform:uppercase;
 }
 .ad-content{
   min-height:90px;
@@ -556,21 +557,21 @@ kbd{
 
 <main id="main">
   <!-- Sponsor Banner Ad at the beginning of the homepage -->
-  <section class="banner-ad-top wrap" aria-label="Sponsors & Partners">
-    <aside class="ad-slot ad-slot-banner" aria-label="Sponsored Partners">
+   <section class="banner-ad-top wrap" aria-label="Advertisement">
+     <aside class="ad-slot ad-slot-banner" aria-label="Advertisement and sponsored placement">
       <div class="ad-head">
-        <span class="ad-label">Featured Sponsors &amp; Partners</span>
-        <span class="ad-hint">Official Placement</span>
+        <span class="ad-label">ADVERTISEMENT · SPONSORED</span>
+        <span class="ad-hint">Paid placement</span>
       </div>
       <div class="ad-content ad-content-banner">
         <div id="container-90290a73d0f302872b0b460384cf280f"></div>
         <script async="async" data-cfasync="false" src="https://pl29661013.profitableratecpmnetwork.com/90290a73d0f302872b0b460384cf280f/invoke.js"></script>
 
         <div class="sponsor-placeholder" id="sponsorPlaceholder">
-          <span class="sponsor-badge">Partner Space</span>
+           <span class="sponsor-badge">ADVERTISEMENT</span>
           <div class="sponsor-info">
-            <span class="sponsor-title">vectric<span class="brand-accent">Spin</span> Verified Partner Hub</span>
-            <span class="sponsor-desc">Live banner ads automatically populate when deployed on <span class="domain-tag">vectric.online</span></span>
+           <span class="sponsor-title">Sponsored placement from a vectric<span class="brand-accent">Spin</span> partner</span>
+           <span class="sponsor-desc">This space contains paid advertising and is separate from the wheel tool.</span>
           </div>
           <a href="contact.html" class="sponsor-link">Sponsor this wheel &rarr;</a>
         </div>
@@ -631,7 +632,7 @@ kbd{
 
     <h3>How vectricSpin works</h3>
     <p>The wheel splits your list into equal slices, so every option carries the exact same mathematical probability. Whether you enter two choices or twenty, vectricSpin allocates each item an identical angular arc and picks a winner using your browser's built-in pseudorandom number generator. That means a spin for "pizza vs sushi" is statistically just as fair as a spin for ten different dinner ideas.</p>
-    <p>Unlike most online wheels that stop after a few seconds, vectricSpin uses a real exponential friction model. Every spin runs between <strong>15 and 30 seconds</strong>, chosen at random each time. The wheel starts fast, decelerates continuously, and slows to a dramatic crawl near the end — the pointer clicks past one segment at a time until it lands. There is no constant-speed blur and no sudden stop. Every spin is a genuine, verifiable outcome you can watch happen.</p>
+     <p>Unlike most online wheels that stop after a few seconds, vectricSpin uses a smooth friction-inspired motion model. Every spin runs for about <strong>8 to 10 seconds</strong>, chosen at random each time. The wheel starts fast, decelerates continuously, and eases gently into its final answer — the pointer clicks past one segment at a time until it lands. There is no constant-speed blur or abrupt stop.</p>
 
     <h3>Ways people use vectricSpin every day</h3>
     <ul class="usecases">
@@ -655,7 +656,7 @@ kbd{
     <h3>Frequently asked questions</h3>
     <div class="faq">
       <details><summary>Is the vectricSpin outcome really random?</summary><p>Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias.</p></details>
-      <details><summary>How long does each spin take?</summary><p>Between 15 and 30 seconds. The exact duration is randomized every time. The wheel decelerates continuously like a real physical wheel, so the slowdown is gradual and suspenseful rather than sudden. You can also press the Stop button at any moment to slow and halt the wheel earlier.</p></details>
+       <details><summary>How long does each spin take?</summary><p>About 8 to 10 seconds. The exact duration is randomized every time. The wheel decelerates continuously, then eases into the final answer instead of stopping abruptly. You can also press the Stop button at any moment to slow and halt the wheel earlier.</p></details>
       <details><summary>Can I spin or stop without the button?</summary><p>Yes. Click or tap the wheel directly, flick it on a touchscreen, click the center hub, or press the <kbd>Space</kbd> bar to both spin and stop the wheel.</p></details>
       <details><summary>Are my options saved?</summary><p>Yes, they are stored locally on your device using HTML5 localStorage. Nothing leaves your browser.</p></details>
       <details><summary>Is there a limit on how many options I can add?</summary><p>You can add from two options up to dozens. Slice angles and label sizes adjust automatically to stay readable.</p></details>
@@ -836,17 +837,21 @@ kbd{
     wheelStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  var POPUP_COOLDOWN_MS = 2 * 60 * 1000;
+  var POPUP_LAST_SHOWN_KEY = 'vectricspin.popupLastShown';
+
   function triggerPopupAd() {
     try {
-      if (!window.__vectricPopupLoaded) {
-        window.__vectricPopupLoaded = true;
-        var s = document.createElement('script');
-        s.id = 'vectric-popup-ad';
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'https://pl29661129.profitableratecpmnetwork.com/55/b7/26/55b726eacea5584011957659ebe40aac.js';
-        document.body.appendChild(s);
-      }
+      var lastShown = Number(localStorage.getItem(POPUP_LAST_SHOWN_KEY) || 0);
+      if (Date.now() - lastShown < POPUP_COOLDOWN_MS) return;
+
+      localStorage.setItem(POPUP_LAST_SHOWN_KEY, String(Date.now()));
+      var s = document.createElement('script');
+      s.id = 'vectric-popup-ad';
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://pl29661129.profitableratecpmnetwork.com/55/b7/26/55b726eacea5584011957659ebe40aac.js';
+      document.body.appendChild(s);
     } catch (e) {}
   }
 
@@ -868,35 +873,27 @@ kbd{
 
     var startRot = rotation;
 
-    /* Random duration: 15 to 30 seconds */
-    var durationMs  = 15000 + Math.random() * 15000;   // 15s – 30s randomly
+    /* Random duration: 8 to 10 seconds, with a soft landing */
+    var durationMs  = 8000 + Math.random() * 2000;   // 8s – 10s randomly
     var durationSec = durationMs / 1000;
 
-    /* Rotations scale with duration so speed stays physically plausible */
-    var rotations = 18 + durationSec * 0.45;            // 15s ≈ 25 turns, 30s ≈ 31.5 turns
+    /* Keep the wheel lively while leaving enough time for a clear slowdown */
+    var rotations = 10 + durationSec * 0.3;
     var totalRad  = rotations * Math.PI * 2 + Math.random() * Math.PI * 2;
 
-    /* Exponential friction model — matches how a physical wheel slows down */
-    var tau    = durationSec / 2.6;
-    var denom  = 1 - Math.exp(-durationSec / tau);
-
     var startTime = performance.now();
-    var lastNow = startTime;
-    currentOmega = totalRad / (tau * denom);
 
     function frame(now) {
       if (!spinning || isStopping) return;
 
       var tSec = Math.min((now - startTime) / 1000, durationSec);
-      var dt = Math.max(0.001, (now - lastNow) / 1000);
-
-      /* Fast start, continuous deceleration, still moving at the very end */
-      var eased = (1 - Math.exp(-tSec / tau)) / denom;
+      var progress = tSec / durationSec;
+      /* Quintic ease-out reaches zero velocity at the final frame. */
+      var eased = 1 - Math.pow(1 - progress, 5);
       var nextRot = startRot + totalRad * eased;
-
-      currentOmega = (nextRot - rotation) / dt;
+      currentOmega = (nextRot - rotation) / Math.max(0.001, (now - (frame.lastNow || startTime)) / 1000);
       rotation = nextRot;
-      lastNow = now;
+      frame.lastNow = now;
 
       draw(rotation);
 
@@ -925,9 +922,9 @@ kbd{
     resultTxt.textContent = 'Slowing to a stop…';
 
     var stopStartRot = rotation;
-    /* Maintain natural angular speed, at least 2.5 rad/s for visible braking */
+    /* Give a manual stop a visible, smooth 1.6–2.3 second landing. */
     var safeOmega = Math.max(currentOmega, 2.5);
-    var brakeDuration = Math.min(1.4, Math.max(0.7, safeOmega * 0.08));
+    var brakeDuration = Math.min(2.3, Math.max(1.6, safeOmega * 0.12));
     var brakeDistance = safeOmega * (brakeDuration * 0.5);
     var brakeStart = performance.now();
 
@@ -964,9 +961,15 @@ kbd{
     draw(rotation);
 
     var arc = (Math.PI * 2) / options.length;
-    var idx = (-rotation / arc) % options.length;
-    idx = ((idx % options.length) + options.length) % options.length;
-    idx = Math.floor(idx);
+    var fullTurn = Math.PI * 2;
+    var normalizedRotation = ((rotation % fullTurn) + fullTurn) % fullTurn;
+    /*
+     * The canvas builds each slice centered on 12 o'clock at rotation 0.
+     * Account for that half-slice offset so the result bar always names
+     * the segment actually beneath the pointer.
+     */
+    var pointerOffset = (arc / 2) - normalizedRotation;
+    var idx = Math.floor((pointerOffset + fullTurn) / arc) % options.length;
     resultTxt.textContent = options[idx];
   }
 
