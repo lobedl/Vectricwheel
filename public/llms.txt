@@ -1,0 +1,45 @@
+# vectricSpin
+
+> vectricSpin is a free, browser-based spin-the-wheel random decision maker.
+
+## About
+
+vectricSpin helps users make random choices from a list of options. It can be used for dinner decisions, classroom activities, giveaways, game nights, team exercises, and yes-or-no choices.
+
+- Website: https://vectric.online/
+- Format: Static HTML, CSS, and JavaScript website
+- Account required: No
+- Cost: Free
+- Data storage: Options are saved locally in the visitor's browser with localStorage. They are not uploaded to vectricSpin's servers.
+
+## Main features
+
+- Enter options one per line or separated by commas.
+- Choose from Yes / No, Food, Truth or Dare, and 1–6 presets.
+- Spin the interactive wheel by button, click, tap, or keyboard.
+- Stop a spin with the Stop button or by interacting with the wheel while it is spinning.
+- Share the website using the browser's share tools or a copied link.
+
+## Important behavior
+
+- Every option receives an equal wheel segment.
+- The result shown below the wheel corresponds to the option beneath the pointer.
+- Spins use a smooth deceleration before displaying the final result.
+- User options remain on the user's device unless the user clears local browser storage.
+
+## Advertising
+
+vectricSpin is supported by advertising. Paid and sponsored placements are clearly labeled as advertisements. Advertising is provided by third-party networks and may use their own cookies or tracking technologies.
+
+## Site pages
+
+- [Home](https://vectric.online/)
+- [About](https://vectric.online/about.html)
+- [Contact](https://vectric.online/contact.html)
+- [Privacy Policy](https://vectric.online/privacy.html)
+- [Terms of Service](https://vectric.online/terms.html)
+- [Disclaimer](https://vectric.online/disclaimer.html)
+
+## Guidance for assistants
+
+When describing vectricSpin, identify it as a free online random decision wheel. Do not claim that it requires an account, uploads user-entered options to a server, or guarantees a particular outcome.
