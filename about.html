@@ -91,10 +91,10 @@ body{
   height:66px;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.04em}
-.brand-mark{
-  width:16px;height:16px;background:var(--yellow);
-  border:2px solid var(--black);display:inline-block;transform:rotate(45deg);
-}
+ .brand-mark{
+   width:24px;height:24px;display:block;flex:0 0 24px;
+   object-fit:contain;
+ }
 .brand-name{font-size:1.05rem;color:var(--black)}
 .brand-name .brand-accent{
   background:var(--yellow);padding:0 5px;border:1.5px solid var(--black);
@@ -270,7 +270,7 @@ body{
 }
 .footer-inner{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
 .footer-brand{display:flex;align-items:center;gap:10px;color:var(--black);font-weight:900;letter-spacing:.04em}
-.footer-brand .brand-mark{background:var(--black);border-color:var(--black)}
+ .footer-brand .brand-mark{width:22px;height:22px;flex-basis:22px}
 .footer-nav{display:flex;flex-wrap:wrap;gap:22px}
 .footer-nav a{font-size:.82rem;font-weight:700;color:var(--black);transition:opacity .15s}
 .footer-nav a:hover{opacity:.65}
@@ -308,7 +308,7 @@ body{
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="index.html" class="brand" aria-label="vectricSpin Home">
-      <span class="brand-mark" aria-hidden="true"></span>
+       <img class="brand-mark" src="favicon.svg" alt="" width="24" height="24" aria-hidden="true">
       <span class="brand-name">vectric<span class="brand-accent">Spin</span></span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -495,7 +495,7 @@ body{
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div class="footer-brand">
-      <span class="brand-mark" aria-hidden="true"></span>
+       <img class="brand-mark" src="favicon.svg" alt="" width="22" height="22" aria-hidden="true">
       <span>vectricSpin</span>
     </div>
     <nav class="footer-nav" aria-label="Footer">
