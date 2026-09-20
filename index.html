@@ -26,6 +26,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#FFD400">
 <link rel="dns-prefetch" href="https://pl29661129.profitableratecpmnetwork.com">
+<link rel="dns-prefetch" href="https://pl29661013.profitableratecpmnetwork.com">
 
 <script type="application/ld+json">
 {
@@ -46,7 +47,7 @@
       "@id":"https://vectric.online/#faq",
       "mainEntity":[
         {"@type":"Question","name":"Is the vectricSpin outcome truly random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias."}},
-        {"@type":"Question","name":"How long does a vectricSpin last?","acceptedAnswer":{"@type":"Answer","text":"Each spin runs between 15 seconds and 2 minutes. The duration is chosen randomly and the wheel decelerates smoothly like a real physical wheel, so the slowdown is gradual and suspenseful."}},
+        {"@type":"Question","name":"How long does a vectricSpin last?","acceptedAnswer":{"@type":"Answer","text":"Each spin runs between 15 and 30 seconds, chosen randomly each time. The wheel decelerates smoothly like a real physical wheel, so the slowdown is gradual and suspenseful."}},
         {"@type":"Question","name":"Can I spin without clicking the button?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tap the wheel directly, flick it on a touchscreen, click the center hub, or press the Spacebar."}},
         {"@type":"Question","name":"Are my options saved?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your list is stored locally on your device using HTML5 localStorage. Nothing is uploaded to a server."}},
         {"@type":"Question","name":"Is vectricSpin free?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is completely free with unlimited spins and no account required."}}
@@ -208,28 +209,64 @@ kbd{
   resize:vertical;font-family:var(--font);transition:box-shadow .15s;
 }
 .textarea:focus{outline:none;box-shadow:4px 4px 0 var(--yellow)}
-.actions{display:flex;gap:12px;margin-top:16px}
+.actions{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
 .btn{
   border:2px solid var(--black);cursor:pointer;font-weight:800;letter-spacing:.04em;
-  padding:14px 26px;border-radius:var(--radius);font-size:.9rem;
+  padding:14px 24px;border-radius:var(--radius);font-size:.9rem;
   transition:transform .12s,box-shadow .12s,background .15s;
 }
 .btn:active{transform:translate(2px,2px);box-shadow:none!important}
-.btn-primary{background:var(--yellow);color:var(--black);flex:1;box-shadow:4px 4px 0 var(--black)}
+.btn-primary{background:var(--yellow);color:var(--black);flex:1.5;min-width:140px;box-shadow:4px 4px 0 var(--black)}
 .btn-primary:hover{background:var(--yellow-dark)}
 .btn-primary:disabled{opacity:.55;cursor:not-allowed}
-.btn-ghost{background:var(--white);color:var(--black)}
+.btn-stop{
+  background:var(--white);
+  color:var(--gray-400);
+  border:2px solid var(--gray-300);
+  min-width:90px;
+}
+.btn-stop:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  box-shadow:none!important;
+}
+.btn-stop.is-active{
+  background:#ef4444;
+  color:#ffffff;
+  border-color:var(--black);
+  box-shadow:4px 4px 0 var(--black);
+  cursor:pointer;
+  opacity:1;
+}
+.btn-stop.is-active:hover{
+  background:#dc2626;
+}
+.btn-stop.is-stopping{
+  background:#f97316;
+  color:#ffffff;
+  border-color:var(--black);
+  box-shadow:2px 2px 0 var(--black);
+  cursor:wait;
+  opacity:1;
+}
+.btn-ghost{background:var(--white);color:var(--black);min-width:80px}
 .btn-ghost:hover{background:var(--yellow-soft)}
 
-/* ============ AD SLOT — fully flexible, no clipping ============ */
+/* ============ AD SLOT & SPONSORS — fully flexible, responsive ============ */
+.banner-ad-top{
+  padding:20px 0 6px;
+}
 .ad-slot{
-  margin-top:28px;
   background:linear-gradient(180deg,var(--white) 0%,var(--gray-50) 100%);
   border:1.5px solid var(--gray-100);
   border-radius:var(--radius-lg);
-  padding:18px 16px 14px;
+  padding:16px 16px 12px;
   position:relative;
   box-shadow:0 1px 0 rgba(0,0,0,.02);
+}
+.ad-slot-banner{
+  margin:0 auto;
+  width:100%;
 }
 .ad-slot::before{
   content:"";
@@ -263,6 +300,7 @@ kbd{
   border:1px solid var(--gray-100);
   border-radius:8px;
   padding:8px;
+  position:relative;
 }
 .ad-content > *{max-width:100%;height:auto}
 .ad-content iframe,
@@ -272,6 +310,88 @@ kbd{
   max-width:100% !important;
   height:auto !important;
   display:block;
+}
+#container-90290a73d0f302872b0b460384cf280f{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+#container-90290a73d0f302872b0b460384cf280f:not(:empty) + .sponsor-placeholder{
+  display:none !important;
+}
+.sponsor-placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  width:100%;
+  padding:12px 18px;
+  background:linear-gradient(90deg,var(--gray-50) 0%,var(--white) 50%,#fffbeb 100%);
+  border:1.5px dashed var(--gray-200);
+  border-radius:8px;
+}
+.sponsor-badge{
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background:var(--yellow);
+  color:var(--black);
+  border:1.5px solid var(--black);
+  padding:4px 10px;
+  border-radius:999px;
+  white-space:nowrap;
+  box-shadow:2px 2px 0 var(--black);
+}
+.sponsor-info{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  flex:1;
+}
+.sponsor-title{
+  font-size:.85rem;
+  font-weight:800;
+  color:var(--black);
+  letter-spacing:-.01em;
+}
+.sponsor-desc{
+  font-size:.76rem;
+  color:var(--gray-500);
+}
+.domain-tag{
+  font-family:monospace;
+  background:var(--gray-100);
+  padding:1px 5px;
+  border-radius:3px;
+  font-weight:700;
+  color:var(--black);
+}
+.sponsor-link{
+  font-size:.78rem;
+  font-weight:800;
+  color:var(--black);
+  text-decoration:none;
+  padding:6px 14px;
+  border:1.5px solid var(--black);
+  background:var(--white);
+  border-radius:var(--radius);
+  white-space:nowrap;
+  box-shadow:2px 2px 0 var(--black);
+  transition:background .12s,transform .12s;
+}
+.sponsor-link:hover{
+  background:var(--yellow);
+  transform:translate(-1px,-1px);
+}
+@media(max-width:720px){
+  .sponsor-placeholder{
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+    padding:14px;
+  }
 }
 
 /* Wheel stage */
@@ -435,6 +555,29 @@ kbd{
 </header>
 
 <main id="main">
+  <!-- Sponsor Banner Ad at the beginning of the homepage -->
+  <section class="banner-ad-top wrap" aria-label="Sponsors & Partners">
+    <aside class="ad-slot ad-slot-banner" aria-label="Sponsored Partners">
+      <div class="ad-head">
+        <span class="ad-label">Featured Sponsors &amp; Partners</span>
+        <span class="ad-hint">Official Placement</span>
+      </div>
+      <div class="ad-content ad-content-banner">
+        <div id="container-90290a73d0f302872b0b460384cf280f"></div>
+        <script async="async" data-cfasync="false" src="https://pl29661013.profitableratecpmnetwork.com/90290a73d0f302872b0b460384cf280f/invoke.js"></script>
+
+        <div class="sponsor-placeholder" id="sponsorPlaceholder">
+          <span class="sponsor-badge">Partner Space</span>
+          <div class="sponsor-info">
+            <span class="sponsor-title">vectric<span class="brand-accent">Spin</span> Verified Partner Hub</span>
+            <span class="sponsor-desc">Live banner ads automatically populate when deployed on <span class="domain-tag">vectric.online</span></span>
+          </div>
+          <a href="contact.html" class="sponsor-link">Sponsor this wheel &rarr;</a>
+        </div>
+      </div>
+    </aside>
+  </section>
+
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-copy">
@@ -453,18 +596,9 @@ kbd{
           <textarea id="optionsInput" class="textarea" rows="5" spellcheck="false" placeholder="Pizza, Burger, Sushi, Tacos, Salad"></textarea>
           <div class="actions">
             <button type="button" id="spinBtn" class="btn btn-primary">Spin the wheel</button>
+            <button type="button" id="stopBtn" class="btn btn-stop" disabled>Stop</button>
             <button type="button" id="resetBtn" class="btn btn-ghost">Reset</button>
           </div>
-
-          <aside class="ad-slot" aria-label="Advertisement">
-            <div class="ad-head">
-              <span class="ad-label">Advertisement</span>
-              <span class="ad-hint">Sponsored</span>
-            </div>
-            <div class="ad-content">
-              <script src="https://pl29661129.profitableratecpmnetwork.com/55/b7/26/55b726eacea5584011957659ebe40aac.js"></script>
-            </div>
-          </aside>
         </div>
       </div>
 
@@ -484,7 +618,7 @@ kbd{
           <span class="result-v" id="resultText">Ready when you are</span>
         </div>
 
-        <p class="hint">Tap the wheel or press <kbd>Space</kbd></p>
+        <p class="hint">Tap the wheel or press <kbd>Space</kbd> to spin or stop</p>
       </div>
     </div>
   </section>
@@ -497,7 +631,7 @@ kbd{
 
     <h3>How vectricSpin works</h3>
     <p>The wheel splits your list into equal slices, so every option carries the exact same mathematical probability. Whether you enter two choices or twenty, vectricSpin allocates each item an identical angular arc and picks a winner using your browser's built-in pseudorandom number generator. That means a spin for "pizza vs sushi" is statistically just as fair as a spin for ten different dinner ideas.</p>
-    <p>Unlike most online wheels that stop after a few seconds, vectricSpin uses a real exponential friction model. Every spin runs between <strong>15 seconds and 2 minutes</strong>, chosen at random each time. The wheel starts fast, decelerates continuously, and slows to a dramatic crawl near the end — the pointer clicks past one segment at a time until it lands. There is no constant-speed blur and no sudden stop. Every spin is a genuine, verifiable outcome you can watch happen.</p>
+    <p>Unlike most online wheels that stop after a few seconds, vectricSpin uses a real exponential friction model. Every spin runs between <strong>15 and 30 seconds</strong>, chosen at random each time. The wheel starts fast, decelerates continuously, and slows to a dramatic crawl near the end — the pointer clicks past one segment at a time until it lands. There is no constant-speed blur and no sudden stop. Every spin is a genuine, verifiable outcome you can watch happen.</p>
 
     <h3>Ways people use vectricSpin every day</h3>
     <ul class="usecases">
@@ -521,8 +655,8 @@ kbd{
     <h3>Frequently asked questions</h3>
     <div class="faq">
       <details><summary>Is the vectricSpin outcome really random?</summary><p>Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias.</p></details>
-      <details><summary>How long does each spin take?</summary><p>Between 15 seconds and 2 minutes. The exact duration is randomized every time. The wheel decelerates continuously like a real physical wheel, so the slowdown is gradual and suspenseful rather than sudden.</p></details>
-      <details><summary>Can I spin without the button?</summary><p>Click or tap the wheel directly, flick it on a touchscreen, click the center hub, or press the <kbd>Space</kbd> bar.</p></details>
+      <details><summary>How long does each spin take?</summary><p>Between 15 and 30 seconds. The exact duration is randomized every time. The wheel decelerates continuously like a real physical wheel, so the slowdown is gradual and suspenseful rather than sudden. You can also press the Stop button at any moment to slow and halt the wheel earlier.</p></details>
+      <details><summary>Can I spin or stop without the button?</summary><p>Yes. Click or tap the wheel directly, flick it on a touchscreen, click the center hub, or press the <kbd>Space</kbd> bar to both spin and stop the wheel.</p></details>
       <details><summary>Are my options saved?</summary><p>Yes, they are stored locally on your device using HTML5 localStorage. Nothing leaves your browser.</p></details>
       <details><summary>Is there a limit on how many options I can add?</summary><p>You can add from two options up to dozens. Slice angles and label sizes adjust automatically to stay readable.</p></details>
       <details><summary>Does it work offline?</summary><p>Once the page has loaded, vectricSpin keeps working without an internet connection.</p></details>
@@ -574,6 +708,7 @@ kbd{
   var ctx       = canvas.getContext('2d');
   var input     = document.getElementById('optionsInput');
   var spinBtn   = document.getElementById('spinBtn');
+  var stopBtn   = document.getElementById('stopBtn');
   var resetBtn  = document.getElementById('resetBtn');
   var resultTxt = document.getElementById('resultText');
   var chips     = document.querySelectorAll('.chip');
@@ -585,6 +720,9 @@ kbd{
   var offscreen = null;
   var rotation  = 0;
   var spinning  = false;
+  var isStopping= false;
+  var animFrameId = null;
+  var currentOmega = 0;
   var dpr       = Math.min(window.devicePixelRatio || 1, 2);
 
   function parseOptions(raw) {
@@ -671,13 +809,13 @@ kbd{
     ctx.fill();
     ctx.beginPath();
     ctx.arc(0, 0, hub * 0.72, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFD400';
+    ctx.fillStyle = spinning ? (isStopping ? '#F97316' : '#EF4444') : '#FFD400';
     ctx.fill();
-    ctx.fillStyle = '#0A0A0A';
-    ctx.font = '900 ' + (hub * 0.55) + 'px system-ui,-apple-system,sans-serif';
+    ctx.fillStyle = spinning ? '#FFFFFF' : '#0A0A0A';
+    ctx.font = '900 ' + (hub * 0.48) + 'px system-ui,-apple-system,sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('SPIN', 0, 1);
+    ctx.fillText(spinning ? (isStopping ? 'HOLD' : 'STOP') : 'SPIN', 0, 1);
     ctx.restore();
   }
 
@@ -698,56 +836,146 @@ kbd{
     wheelStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  function triggerPopupAd() {
+    try {
+      if (!window.__vectricPopupLoaded) {
+        window.__vectricPopupLoaded = true;
+        var s = document.createElement('script');
+        s.id = 'vectric-popup-ad';
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'https://pl29661129.profitableratecpmnetwork.com/55/b7/26/55b726eacea5584011957659ebe40aac.js';
+        document.body.appendChild(s);
+      }
+    } catch (e) {}
+  }
+
   function spin() {
     if (spinning) return;
+    triggerPopupAd();
     spinning = true;
+    isStopping = false;
     spinBtn.disabled = true;
+    if (stopBtn) {
+      stopBtn.disabled = false;
+      stopBtn.classList.remove('is-stopping');
+      stopBtn.classList.add('is-active');
+      stopBtn.textContent = 'Stop';
+    }
     resultTxt.textContent = 'Spinning…';
 
     scrollToWheel();
 
     var startRot = rotation;
 
-    /* Random duration: 15 seconds to 2 minutes */
-    var durationMs  = 15000 + Math.random() * 105000;   // 15s – 120s
+    /* Random duration: 15 to 30 seconds */
+    var durationMs  = 15000 + Math.random() * 15000;   // 15s – 30s randomly
     var durationSec = durationMs / 1000;
 
     /* Rotations scale with duration so speed stays physically plausible */
-    var rotations = 20 + durationSec * 0.35;            // 15s ≈ 25 turns, 120s ≈ 62 turns
+    var rotations = 18 + durationSec * 0.45;            // 15s ≈ 25 turns, 30s ≈ 31.5 turns
     var totalRad  = rotations * Math.PI * 2 + Math.random() * Math.PI * 2;
 
-    /* Exponential friction model — matches how a real wheel slows down */
-    var tau    = durationSec / 2.4;
+    /* Exponential friction model — matches how a physical wheel slows down */
+    var tau    = durationSec / 2.6;
     var denom  = 1 - Math.exp(-durationSec / tau);
 
     var startTime = performance.now();
+    var lastNow = startTime;
+    currentOmega = totalRad / (tau * denom);
 
     function frame(now) {
+      if (!spinning || isStopping) return;
+
       var tSec = Math.min((now - startTime) / 1000, durationSec);
+      var dt = Math.max(0.001, (now - lastNow) / 1000);
 
       /* Fast start, continuous deceleration, still moving at the very end */
       var eased = (1 - Math.exp(-tSec / tau)) / denom;
+      var nextRot = startRot + totalRad * eased;
 
-      rotation = startRot + totalRad * eased;
+      currentOmega = (nextRot - rotation) / dt;
+      rotation = nextRot;
+      lastNow = now;
+
       draw(rotation);
 
       if (tSec < durationSec) {
-        requestAnimationFrame(frame);
+        animFrameId = requestAnimationFrame(frame);
       } else {
         finish();
       }
     }
-    requestAnimationFrame(frame);
+    animFrameId = requestAnimationFrame(frame);
+  }
+
+  function stopWheel() {
+    if (!spinning || isStopping) return;
+    isStopping = true;
+    if (animFrameId) {
+      cancelAnimationFrame(animFrameId);
+      animFrameId = null;
+    }
+    if (stopBtn) {
+      stopBtn.disabled = true;
+      stopBtn.classList.remove('is-active');
+      stopBtn.classList.add('is-stopping');
+      stopBtn.textContent = 'Stopping…';
+    }
+    resultTxt.textContent = 'Slowing to a stop…';
+
+    var stopStartRot = rotation;
+    /* Maintain natural angular speed, at least 2.5 rad/s for visible braking */
+    var safeOmega = Math.max(currentOmega, 2.5);
+    var brakeDuration = Math.min(1.4, Math.max(0.7, safeOmega * 0.08));
+    var brakeDistance = safeOmega * (brakeDuration * 0.5);
+    var brakeStart = performance.now();
+
+    function brakeFrame(now) {
+      var elapsed = (now - brakeStart) / 1000;
+      var p = Math.min(1, elapsed / brakeDuration);
+      /* Smooth quadratic ease-out deceleration curve */
+      var ease = 1 - Math.pow(1 - p, 2);
+      rotation = stopStartRot + brakeDistance * ease;
+      draw(rotation);
+
+      if (p < 1) {
+        animFrameId = requestAnimationFrame(brakeFrame);
+      } else {
+        finish();
+      }
+    }
+    animFrameId = requestAnimationFrame(brakeFrame);
   }
 
   function finish() {
     spinning = false;
+    isStopping = false;
+    if (animFrameId) {
+      cancelAnimationFrame(animFrameId);
+      animFrameId = null;
+    }
     spinBtn.disabled = false;
+    if (stopBtn) {
+      stopBtn.disabled = true;
+      stopBtn.classList.remove('is-active', 'is-stopping');
+      stopBtn.textContent = 'Stop';
+    }
+    draw(rotation);
+
     var arc = (Math.PI * 2) / options.length;
     var idx = (-rotation / arc) % options.length;
     idx = ((idx % options.length) + options.length) % options.length;
     idx = Math.floor(idx);
     resultTxt.textContent = options[idx];
+  }
+
+  function handleWheelAction() {
+    if (spinning) {
+      if (!isStopping) stopWheel();
+    } else {
+      spin();
+    }
   }
 
   input.addEventListener('input', function () {
@@ -756,6 +984,7 @@ kbd{
   });
 
   spinBtn.addEventListener('click', spin);
+  if (stopBtn) stopBtn.addEventListener('click', stopWheel);
 
   resetBtn.addEventListener('click', function () {
     input.value = PRESETS.food.join('\n');
@@ -780,7 +1009,7 @@ kbd{
     });
   });
 
-  canvas.addEventListener('click', spin);
+  canvas.addEventListener('click', handleWheelAction);
 
   var touchStartY = 0, touchStartT = 0;
   canvas.addEventListener('touchstart', function (e) {
@@ -790,13 +1019,13 @@ kbd{
   canvas.addEventListener('touchend', function (e) {
     var dy = e.changedTouches[0].clientY - touchStartY;
     var dt = Date.now() - touchStartT;
-    if (Math.abs(dy) > 30 && dt < 600) spin();
+    if (Math.abs(dy) > 30 && dt < 600) handleWheelAction();
   }, { passive: true });
 
   document.addEventListener('keydown', function (e) {
     if (e.code === 'Space' && document.activeElement !== input) {
       e.preventDefault();
-      spin();
+      handleWheelAction();
     }
   });
 
@@ -819,6 +1048,27 @@ kbd{
     try { saved = localStorage.getItem('vectricspin.options') || ''; } catch (e) {}
     input.value = saved || PRESETS.food.join('\n');
     rebuild();
+  })();
+
+  (function initSponsorAd() {
+    var adContainer = document.getElementById('container-90290a73d0f302872b0b460384cf280f');
+    var placeholder = document.getElementById('sponsorPlaceholder');
+    if (!adContainer || !placeholder) return;
+
+    function checkAd() {
+      if (adContainer.children.length > 0 || adContainer.offsetHeight > 20) {
+        placeholder.style.display = 'none';
+      }
+    }
+
+    try {
+      var observer = new MutationObserver(checkAd);
+      observer.observe(adContainer, { childList: true, subtree: true });
+    } catch (e) {}
+
+    setTimeout(checkAd, 1500);
+    setTimeout(checkAd, 3500);
+    setTimeout(checkAd, 7000);
   })();
 
 })();
