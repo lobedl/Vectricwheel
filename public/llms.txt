@@ -18,6 +18,7 @@ vectricSpin helps users make random choices from a list of options. It can be us
 - Choose from Yes / No, Food, Truth or Dare, and 1–6 presets.
 - Spin the interactive wheel by button, click, tap, or keyboard.
 - Stop a spin with the Stop button or by interacting with the wheel while it is spinning.
+- Share the current wheel options through the device's native share sheet or by copying a link.
 - Share the website using the browser's share tools or a copied link.
 
 ## Important behavior

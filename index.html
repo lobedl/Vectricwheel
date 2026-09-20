@@ -260,6 +260,8 @@ kbd{
 }
 .btn-ghost{background:var(--white);color:var(--black);min-width:80px}
 .btn-ghost:hover{background:var(--yellow-soft)}
+.btn-share{background:var(--black);color:var(--white);min-width:120px}
+.btn-share:hover{background:#262626}
 
 /* ============ AD SLOT & SPONSORS — fully flexible, responsive ============ */
 .banner-ad-top{
@@ -608,6 +610,7 @@ kbd{
             <button type="button" id="spinBtn" class="btn btn-primary">Spin the wheel</button>
             <button type="button" id="stopBtn" class="btn btn-stop" disabled>Stop</button>
             <button type="button" id="resetBtn" class="btn btn-ghost">Reset</button>
+            <button type="button" id="shareBtn" class="btn btn-share">Share wheel</button>
           </div>
         </div>
       </div>
@@ -720,6 +723,7 @@ kbd{
   var spinBtn   = document.getElementById('spinBtn');
   var stopBtn   = document.getElementById('stopBtn');
   var resetBtn  = document.getElementById('resetBtn');
+  var shareBtn  = document.getElementById('shareBtn');
   var resultTxt = document.getElementById('resultText');
   var chips     = document.querySelectorAll('.chip');
   var burger    = document.getElementById('burger');
@@ -864,6 +868,73 @@ kbd{
     } catch (e) {}
   }
 
+  function getShareUrl() {
+    var shareUrl = new URL(window.location.href);
+    shareUrl.search = '';
+    shareUrl.searchParams.set('options', input.value);
+    return shareUrl.toString();
+  }
+
+  function showShareFeedback(message) {
+    if (!shareBtn) return;
+    var originalLabel = shareBtn.textContent;
+    shareBtn.textContent = message;
+    shareBtn.disabled = true;
+    setTimeout(function () {
+      shareBtn.textContent = originalLabel;
+      shareBtn.disabled = false;
+    }, 2200);
+  }
+
+  function fallbackCopy(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise(function (resolve, reject) {
+      var copyField = document.createElement('textarea');
+      copyField.value = text;
+      copyField.setAttribute('readonly', '');
+      copyField.style.position = 'fixed';
+      copyField.style.opacity = '0';
+      document.body.appendChild(copyField);
+      copyField.select();
+      try {
+        document.execCommand('copy') ? resolve() : reject(new Error('Copy failed'));
+      } catch (e) {
+        reject(e);
+      } finally {
+        document.body.removeChild(copyField);
+      }
+    });
+  }
+
+  function shareWheel() {
+    var shareUrl = getShareUrl();
+    var shareData = {
+      title: 'vectricSpin – Spin the Wheel',
+      text: 'Try this random decision wheel with my options.',
+      url: shareUrl
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData)
+        .then(function () { showShareFeedback('Shared!'); })
+        .catch(function (error) {
+          if (error && error.name !== 'AbortError') {
+            fallbackCopy(shareUrl)
+              .then(function () { showShareFeedback('Link copied!'); })
+              .catch(function () { showShareFeedback('Copy failed'); });
+          }
+        });
+      return;
+    }
+
+    fallbackCopy(shareUrl)
+      .then(function () { showShareFeedback('Link copied!'); })
+      .catch(function () { showShareFeedback('Copy failed'); });
+  }
+
   function spin() {
     if (spinning) return;
     triggerPopupAd();
@@ -997,6 +1068,7 @@ kbd{
 
   spinBtn.addEventListener('click', spin);
   if (stopBtn) stopBtn.addEventListener('click', stopWheel);
+  if (shareBtn) shareBtn.addEventListener('click', shareWheel);
 
   resetBtn.addEventListener('click', function () {
     input.value = PRESETS.food.join('\n');
@@ -1057,8 +1129,10 @@ kbd{
 
   (function init() {
     var saved = '';
+    var sharedOptions = '';
     try { saved = localStorage.getItem('vectricspin.options') || ''; } catch (e) {}
-    input.value = saved || PRESETS.food.join('\n');
+    try { sharedOptions = new URLSearchParams(window.location.search).get('options') || ''; } catch (e) {}
+    input.value = sharedOptions || saved || PRESETS.food.join('\n');
     rebuild();
   })();
 
