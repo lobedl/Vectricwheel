@@ -14,8 +14,11 @@
 <title>vectricSpin – Free Spin the Wheel Random Decision Maker</title>
 <meta name="description" content="vectricSpin is a free online spin the wheel tool. Pick random names, decide what to eat, run giveaways, or settle debates in one click. Fast, fair, mobile friendly.">
 <meta name="keywords" content="vectricSpin, spin the wheel, random decision maker, random picker, wheel of fortune, decision wheel, random name picker">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://vectric.online/">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 <meta property="og:title" content="vectricSpin – Free Spin the Wheel Random Decision Maker">
 <meta property="og:description" content="Free online spin the wheel tool. Pick random names, decide what to eat, run giveaways, or settle debates in one click.">
 <meta property="og:type" content="website">
@@ -32,14 +35,16 @@
 <meta name="twitter:description" content="Free online spin the wheel tool. Fast, fair, mobile friendly.">
 <meta name="twitter:image" content="https://vectric.online/og-image.png">
 <meta name="twitter:image:alt" content="vectricSpin spin the wheel random decision maker">
-<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="144x144" href="/favicon-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#FFD400">
-<link rel="dns-prefetch" href="https://pl29661129.profitableratecpmnetwork.com">
 <link rel="dns-prefetch" href="https://pl29661013.profitableratecpmnetwork.com">
 
 <script type="application/ld+json">
@@ -47,11 +52,33 @@
   "@context":"https://schema.org",
   "@graph":[
     {
+      "@type":"WebSite",
+      "@id":"https://vectric.online/#website",
+      "url":"https://vectric.online/",
+      "name":"vectricSpin",
+      "alternateName":["vectricSpin Decision Wheel","Spin the Wheel Online","vectric.online"],
+      "description":"Free online spin the wheel random decision maker. Pick names, choose meals, make fair group decisions instantly.",
+      "publisher":{"@id":"https://vectric.online/#organization"},
+      "inLanguage":"en-US"
+    },
+    {
+      "@type":"Organization",
+      "@id":"https://vectric.online/#organization",
+      "name":"vectricSpin",
+      "url":"https://vectric.online/",
+      "logo":{
+        "@type":"ImageObject",
+        "url":"https://vectric.online/favicon-512x512.png",
+        "width":512,
+        "height":512
+      }
+    },
+    {
       "@type":"WebApplication",
       "@id":"https://vectric.online/#webapp",
       "name":"vectricSpin – Spin the Wheel Random Decision Maker",
       "url":"https://vectric.online/",
-      "logo":"https://vectric.online/favicon.svg",
+      "logo":"https://vectric.online/favicon-512x512.png",
       "applicationCategory":"UtilityApplication",
       "operatingSystem":"All",
       "browserRequirements":"Requires JavaScript. Requires HTML5 Canvas support.",
@@ -160,10 +187,10 @@ kbd{
 .burger span{display:block;height:2px;background:var(--black);border-radius:2px}
 .mobile-nav{display:none}
 
-/* ============ HERO ============ */
+/* ============ HERO (WHEEL FIRST) ============ */
 .hero{
   background:var(--white);color:var(--ink);
-  padding:64px 0 80px;position:relative;overflow:hidden;
+  padding:36px 0 44px;position:relative;overflow:hidden;
   border-bottom:1px solid var(--gray-100);
 }
 .hero::before{
@@ -179,66 +206,64 @@ kbd{
   pointer-events:none;z-index:0;
 }
 .hero-inner{
-  position:relative;z-index:1;display:grid;gap:56px;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  align-items:start;
+  position:relative;z-index:1;display:flex;flex-direction:column;
+  align-items:center;text-align:center;max-width:820px;margin:0 auto;
+}
+.hero-header{
+  display:flex;flex-direction:column;align-items:center;
+  margin-bottom:22px;
 }
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--black);margin-bottom:20px;
+  color:var(--black);margin-bottom:14px;
   background:var(--yellow);padding:6px 14px;border-radius:999px;
+  border:1.5px solid var(--black);box-shadow:2px 2px 0 var(--black);
 }
 .eyebrow .dot{width:8px;height:8px;background:var(--black);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 .hero-title{
-  font-size:clamp(2rem,4.6vw,3.4rem);
-  line-height:1.05;letter-spacing:-.025em;font-weight:900;
-  margin-bottom:18px;color:var(--black);
+  font-size:clamp(1.9rem,4.4vw,3.1rem);
+  line-height:1.06;letter-spacing:-.025em;font-weight:900;
+  margin-bottom:12px;color:var(--black);
 }
 .hero-title .hl{
   background:var(--yellow);color:var(--black);
-  padding:2px 12px;display:inline-block;margin-top:6px;
+  padding:2px 12px;display:inline-block;margin-top:4px;
   box-shadow:4px 4px 0 var(--black);
 }
-.hero-sub{color:var(--gray-700);max-width:52ch;margin-bottom:36px;font-size:1.02rem}
+.hero-sub{color:var(--gray-700);max-width:54ch;margin:0 auto;font-size:1.02rem;line-height:1.5}
 
-.controls{max-width:520px}
-.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.chip{
-  background:var(--white);color:var(--black);
-  border:1.5px solid var(--gray-300);padding:8px 14px;border-radius:999px;
-  font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;
+/* Wheel controls & sub-bar below wheel */
+.wheel-controls{
+  display:flex;gap:12px;width:100%;max-width:440px;
+  justify-content:center;align-items:stretch;margin-top:4px;
 }
-.chip:hover{border-color:var(--black);background:var(--yellow-soft)}
-.chip.is-active{background:var(--yellow);color:var(--black);border-color:var(--black);box-shadow:2px 2px 0 var(--black)}
-.field-label{
-  display:block;font-size:.78rem;font-weight:800;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--black);margin-bottom:10px;
+.wheel-sub-bar{
+  display:flex;gap:12px;width:100%;max-width:440px;
+  justify-content:center;align-items:center;flex-wrap:wrap;
+  margin-top:2px;
 }
-.field-label span{color:var(--gray-500);font-weight:500;text-transform:none;letter-spacing:0}
-.textarea{
-  width:100%;background:var(--white);color:var(--ink);
-  border:2px solid var(--black);border-radius:var(--radius);
-  padding:14px 16px;font-size:.95rem;line-height:1.5;
-  resize:vertical;font-family:var(--font);transition:box-shadow .15s;
-}
-.textarea:focus{outline:none;box-shadow:4px 4px 0 var(--yellow)}
-.actions{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
 .btn{
-  border:2px solid var(--black);cursor:pointer;font-weight:800;letter-spacing:.04em;
-  padding:14px 24px;border-radius:var(--radius);font-size:.9rem;
+  border:2px solid var(--black);cursor:pointer;font-weight:800;letter-spacing:.03em;
+  padding:14px 22px;border-radius:var(--radius);font-size:.92rem;
   transition:transform .12s,box-shadow .12s,background .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;
 }
 .btn:active{transform:translate(2px,2px);box-shadow:none!important}
-.btn-primary{background:var(--yellow);color:var(--black);flex:1.5;min-width:140px;box-shadow:4px 4px 0 var(--black)}
+.btn-icon{flex-shrink:0}
+.btn-primary{background:var(--yellow);color:var(--black);box-shadow:4px 4px 0 var(--black)}
 .btn-primary:hover{background:var(--yellow-dark)}
 .btn-primary:disabled{opacity:.55;cursor:not-allowed}
+.btn-spin-main{
+  flex:2;font-size:1.05rem;padding:16px 26px;
+}
 .btn-stop{
   background:var(--white);
   color:var(--gray-400);
   border:2px solid var(--gray-300);
-  min-width:90px;
+  flex:1;min-width:96px;
 }
 .btn-stop:disabled{
   opacity:.45;
@@ -264,37 +289,230 @@ kbd{
   cursor:wait;
   opacity:1;
 }
-.btn-ghost{background:var(--white);color:var(--black);min-width:80px}
-.btn-ghost:hover{background:var(--yellow-soft)}
-.btn-share{background:var(--black);color:var(--white);min-width:120px}
+.btn-share{
+  background:var(--black);color:var(--white);
+  flex:1;min-width:160px;box-shadow:3px 3px 0 var(--black);
+}
 .btn-share:hover{background:#262626}
+.btn-customize{
+  background:var(--white);color:var(--black);
+  flex:1;min-width:160px;box-shadow:3px 3px 0 var(--black);
+  cursor:pointer;
+  transition:all .15s;
+}
+.btn-customize:hover{background:var(--yellow-soft)}
+.btn-customize.is-active{
+  background:var(--yellow);
+  box-shadow:3px 3px 0 var(--black);
+}
+.btn-ghost{background:var(--white);color:var(--black)}
+.btn-ghost:hover{background:var(--yellow-soft)}
 
-/* ============ AD SLOT & SPONSORS — fully flexible, responsive ============ */
-.banner-ad-top{
-  padding:20px 0 6px;
+/* ============ REDESIGNED INPUT AREA (COLLAPSED BY DEFAULT) ============ */
+.editor-section{
+  padding:32px 0 52px;
+  scroll-margin-top:80px;
+  transition:opacity .25s ease, transform .25s ease;
 }
-.ad-slot{
-  background:linear-gradient(180deg,var(--white) 0%,var(--gray-50) 100%);
-  border:1.5px solid var(--gray-100);
+.editor-section[hidden]{
+  display:none !important;
+}
+.editor-section.is-open{
+  animation:editorFadeIn .28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes editorFadeIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.editor-card{
+  background:var(--white);
+  border:2.5px solid var(--black);
   border-radius:var(--radius-lg);
-  padding:16px 16px 12px;
-  position:relative;
-  box-shadow:0 1px 0 rgba(0,0,0,.02);
+  padding:24px;
+  box-shadow:6px 6px 0 var(--black);
+  display:flex;flex-direction:column;gap:18px;
 }
-.ad-slot-banner{
-  margin:0 auto;
+.editor-head{
+  border-bottom:2px solid var(--gray-100);
+  padding-bottom:14px;
+}
+.editor-title-group{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;margin-bottom:4px;
+}
+.editor-title{
+  font-size:1.35rem;font-weight:900;letter-spacing:-.02em;
+  color:var(--black);display:flex;align-items:center;gap:10px;
+}
+.editor-head-actions{
+  display:flex;align-items:center;gap:10px;
+}
+.btn-close-editor{
+  background:var(--white);color:var(--gray-700);
+  border:1.5px solid var(--gray-300);padding:5px 12px;
+  border-radius:999px;font-size:.78rem;font-weight:800;
+  cursor:pointer;transition:all .15s;
+}
+.btn-close-editor:hover{
+  background:#fee2e2;border-color:#ef4444;color:#b91c1c;
+}
+.options-badge{
+  background:var(--yellow);color:var(--black);
+  border:1.5px solid var(--black);padding:5px 14px;
+  border-radius:999px;font-size:.78rem;font-weight:900;
+  letter-spacing:.04em;box-shadow:2px 2px 0 var(--black);
+}
+.editor-desc{color:var(--gray-600);font-size:.9rem;line-height:1.4}
+.editor-block{display:flex;flex-direction:column;gap:8px}
+.block-label{
+  display:block;font-size:.78rem;font-weight:900;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--black);
+}
+.block-label span{color:var(--gray-500);font-weight:500;text-transform:none;letter-spacing:0}
+
+/* Textarea */
+.textarea{
+  width:100%;background:var(--white);color:var(--ink);
+  border:2px solid var(--black);border-radius:var(--radius);
+  padding:14px 16px;font-size:1rem;line-height:1.6;
+  resize:vertical;font-family:var(--font);transition:box-shadow .15s;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+}
+.textarea:focus{outline:none;box-shadow:3px 3px 0 var(--yellow);border-color:var(--black)}
+
+/* Editor Toolbar */
+.editor-toolbar{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;border-top:2px solid var(--gray-100);
+  padding-top:14px;
+}
+.tool-group{display:flex;flex-wrap:wrap;gap:8px}
+.btn-tool{
+  background:var(--white);color:var(--black);
+  border:1.5px solid var(--gray-300);padding:8px 14px;
+  border-radius:var(--radius);font-size:.82rem;font-weight:700;
+  cursor:pointer;transition:all .15s;
+}
+.btn-tool:hover{background:var(--yellow-soft);border-color:var(--black)}
+.btn-tool-clear:hover{background:#fee2e2;border-color:#ef4444;color:#b91c1c}
+.btn-spin-up{
+  background:var(--yellow);color:var(--black);
+  padding:10px 20px;font-weight:900;font-size:.88rem;
+  box-shadow:3px 3px 0 var(--black);
+}
+.btn-spin-up:hover{background:var(--yellow-dark)}
+
+/* ============ FULLSCREEN INTERSTITIAL AD (5-SEC SKIP TO SPIN) ============ */
+.fullscreen-ad-overlay{
+  position:fixed;inset:0;z-index:999999;
+  background:rgba(18,18,18,0.85);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .22s ease;
+}
+.fullscreen-ad-overlay.is-visible{
+  opacity:1;pointer-events:auto;
+}
+.fullscreen-ad-backdrop{
+  position:absolute;inset:0;cursor:default;
+}
+.fullscreen-ad-modal{
+  position:relative;z-index:2;
+  background:var(--white);color:var(--ink);
+  border:3px solid var(--black);
+  border-radius:var(--radius-lg);
+  box-shadow:8px 8px 0 var(--black);
+  width:100%;max-width:740px;
+  max-height:90vh;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform:translateY(14px) scale(0.97);
+  transition:transform .24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fullscreen-ad-overlay.is-visible .fullscreen-ad-modal{
+  transform:translateY(0) scale(1);
+}
+.fullscreen-ad-topbar{
+  background:var(--gray-50);
+  border-bottom:2px solid var(--black);
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+}
+.ad-brand-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--yellow);color:var(--black);
+  border:1.5px solid var(--black);
+  padding:5px 12px;border-radius:999px;
+  font-size:.76rem;font-weight:900;letter-spacing:.08em;
+  box-shadow:2px 2px 0 var(--black);
+}
+.ad-live-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--black);
+  animation:pulse 1.8s infinite;
+}
+.btn-ad-skip{
+  background:var(--gray-100);color:var(--gray-600);
+  border:2px solid var(--gray-400);border-radius:var(--radius);
+  padding:10px 20px;font-size:.88rem;font-weight:800;
+  cursor:not-allowed;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .18s;
+  box-shadow:none;
+}
+.btn-ad-skip.can-skip{
+  background:var(--yellow);color:var(--black);
+  border-color:var(--black);
+  box-shadow:3px 3px 0 var(--black);
+  cursor:pointer;
+  animation:skipPulse 1.6s infinite;
+}
+.btn-ad-skip.can-skip:hover{
+  background:var(--yellow-dark);
+  transform:translate(-1px,-1px);
+  box-shadow:4px 4px 0 var(--black);
+}
+.btn-ad-skip.can-skip:active{
+  transform:translate(2px,2px);
+  box-shadow:none;
+}
+@keyframes skipPulse{
+  0%,100%{box-shadow:3px 3px 0 var(--black)}
+  50%{box-shadow:0 0 0 5px rgba(255,212,0,.5), 3px 3px 0 var(--black)}
+}
+.fullscreen-ad-progress{
+  height:4px;background:var(--gray-200);width:100%;
+  position:relative;overflow:hidden;
+}
+.fullscreen-ad-progress-fill{
+  height:100%;width:0%;background:var(--yellow);
+  transition:width 0.15s linear;
+}
+.fullscreen-ad-body{
+  padding:24px 20px;
+  overflow-y:auto;
+  display:flex;flex-direction:column;gap:18px;
+  align-items:center;text-align:center;
+}
+.fullscreen-ad-card{
   width:100%;
+  background:linear-gradient(180deg,var(--white) 0%,var(--gray-50) 100%);
+  border:2px solid var(--black);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:4px 4px 0 var(--black);
+  position:relative;
 }
-.ad-slot::before{
-  content:"";
-  position:absolute;top:0;left:0;right:0;height:3px;
+.fullscreen-ad-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--yellow),var(--yellow-dark),var(--yellow));
-  opacity:.85;
-  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  border-radius:var(--radius) var(--radius) 0 0;
 }
 .ad-head{
   display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 .ad-label{
   font-size:.66rem;font-weight:900;letter-spacing:.14em;
@@ -308,8 +526,8 @@ kbd{
   background:var(--black);border-radius:50%;
 }
 .ad-hint{
-  font-size:.64rem;font-weight:800;letter-spacing:.08em;
-  color:var(--gray-700);text-transform:uppercase;
+  font-size:.66rem;font-weight:800;letter-spacing:.06em;
+  color:var(--gray-600);text-transform:uppercase;
 }
 .ad-content{
   min-height:90px;
@@ -317,7 +535,7 @@ kbd{
   background:var(--white);
   border:1px solid var(--gray-100);
   border-radius:8px;
-  padding:8px;
+  padding:10px;
   position:relative;
 }
 .ad-content > *{max-width:100%;height:auto}
@@ -344,9 +562,9 @@ kbd{
   justify-content:space-between;
   gap:16px;
   width:100%;
-  padding:12px 18px;
+  padding:14px 18px;
   background:linear-gradient(90deg,var(--gray-50) 0%,var(--white) 50%,#fffbeb 100%);
-  border:1.5px dashed var(--gray-200);
+  border:1.5px dashed var(--gray-300);
   border-radius:8px;
 }
 .sponsor-badge{
@@ -367,24 +585,17 @@ kbd{
   flex-direction:column;
   gap:2px;
   flex:1;
+  text-align:left;
 }
 .sponsor-title{
-  font-size:.85rem;
+  font-size:.86rem;
   font-weight:800;
   color:var(--black);
   letter-spacing:-.01em;
 }
 .sponsor-desc{
   font-size:.76rem;
-  color:var(--gray-500);
-}
-.domain-tag{
-  font-family:monospace;
-  background:var(--gray-100);
-  padding:1px 5px;
-  border-radius:3px;
-  font-weight:700;
-  color:var(--black);
+  color:var(--gray-600);
 }
 .sponsor-link{
   font-size:.78rem;
@@ -403,6 +614,23 @@ kbd{
   background:var(--yellow);
   transform:translate(-1px,-1px);
 }
+.fullscreen-ad-footer-note{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  color:var(--gray-700);font-size:.86rem;font-weight:700;
+}
+.fullscreen-ad-footer-note svg{flex-shrink:0;color:var(--black)}
+.fullscreen-ad-bottom-bar{
+  background:var(--gray-50);
+  border-top:1.5px solid var(--gray-200);
+  padding:10px 20px;
+  display:flex;align-items:center;justify-content:center;
+}
+.btn-ad-cancel{
+  background:none;border:none;color:var(--gray-600);
+  font-size:.82rem;font-weight:700;cursor:pointer;
+  text-decoration:underline;padding:4px 8px;
+}
+.btn-ad-cancel:hover{color:var(--black)}
 @media(max-width:720px){
   .sponsor-placeholder{
     flex-direction:column;
@@ -410,11 +638,15 @@ kbd{
     gap:10px;
     padding:14px;
   }
+  .sponsor-info{text-align:center}
+  .fullscreen-ad-topbar{padding:12px 14px}
+  .fullscreen-ad-body{padding:18px 14px}
+  .fullscreen-ad-modal{box-shadow:4px 4px 0 var(--black);max-height:94vh}
 }
 
 /* Wheel stage */
-.wheel-stage{display:flex;flex-direction:column;align-items:center;gap:22px;scroll-margin-top:90px}
-.wheel-frame{position:relative;width:100%;max-width:420px;aspect-ratio:1/1}
+.wheel-stage{display:flex;flex-direction:column;align-items:center;gap:18px;scroll-margin-top:90px;width:100%}
+.wheel-frame{position:relative;width:100%;max-width:440px;aspect-ratio:1/1}
 .wheel-frame::before{
   content:"";position:absolute;inset:-14px;border-radius:50%;
   background:var(--yellow);border:2px solid var(--black);z-index:0;
@@ -428,12 +660,12 @@ kbd{
   position:relative;z-index:2;width:100%;height:100%;
   border-radius:50%;cursor:pointer;background:var(--white);
   box-shadow:0 0 0 6px var(--black), 0 20px 60px rgba(0,0,0,.15);
-  touch-action:none;user-select:none;-webkit-user-select:none;
+  touch-action:pan-y;user-select:none;-webkit-user-select:none;
 }
 .wheel:focus{outline:3px solid var(--yellow);outline-offset:8px}
 
 .result{
-  width:100%;max-width:420px;background:var(--yellow);color:var(--black);
+  width:100%;max-width:440px;background:var(--yellow);color:var(--black);
   border-radius:var(--radius);padding:16px 20px;
   border:2px solid var(--black);box-shadow:4px 4px 0 var(--black);
   display:flex;flex-direction:column;gap:2px;text-align:center;
@@ -509,12 +741,12 @@ kbd{
 
 /* ============ RESPONSIVE ============ */
 @media (max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:44px}
-  .hero{padding:40px 0 60px}
-  .wheel-frame{max-width:340px}
-  .result{max-width:340px}
-  .controls{max-width:100%}
+  .wheel-frame{max-width:380px}
+  .result{max-width:380px}
+  .wheel-controls{max-width:380px}
+  .wheel-sub-bar{max-width:380px}
   .ad-slot{max-width:100%}
+  .editor-card{padding:24px}
 }
 @media (max-width:680px){
   .nav{display:none}
@@ -530,8 +762,17 @@ kbd{
     font-weight:700;font-size:.9rem;letter-spacing:.04em;color:var(--black);
   }
   .wrap{padding:0 18px}
-  .actions{flex-direction:column}
+  .hero{padding:24px 0 32px}
+  .wheel-frame{max-width:320px}
+  .result{max-width:320px}
+  .wheel-controls{flex-direction:column;max-width:320px}
+  .wheel-sub-bar{flex-direction:column;max-width:320px}
   .btn{width:100%}
+  .editor-card{padding:20px 16px}
+  .editor-toolbar{flex-direction:column;align-items:stretch}
+  .tool-group{width:100%;justify-content:space-between}
+  .btn-spin-up{width:100%;justify-content:center}
+  .quick-add-row{flex-direction:column}
   .footer-inner{flex-direction:column;align-items:flex-start}
   .hero-title .hl{box-shadow:3px 3px 0 var(--black)}
   .ad-content{padding:6px;min-height:60px}
@@ -573,52 +814,13 @@ kbd{
 </header>
 
 <main id="main">
-  <!-- Sponsor Banner Ad at the beginning of the homepage -->
-   <section class="banner-ad-top wrap" aria-label="Advertisement">
-     <aside class="ad-slot ad-slot-banner" aria-label="Advertisement and sponsored placement">
-      <div class="ad-head">
-        <span class="ad-label">ADVERTISEMENT · SPONSORED</span>
-        <span class="ad-hint">Paid placement</span>
-      </div>
-      <div class="ad-content ad-content-banner">
-        <div id="container-90290a73d0f302872b0b460384cf280f"></div>
-        <script async="async" data-cfasync="false" src="https://pl29661013.profitableratecpmnetwork.com/90290a73d0f302872b0b460384cf280f/invoke.js"></script>
-
-        <div class="sponsor-placeholder" id="sponsorPlaceholder">
-           <span class="sponsor-badge">ADVERTISEMENT</span>
-          <div class="sponsor-info">
-           <span class="sponsor-title">Sponsored placement from a vectric<span class="brand-accent">Spin</span> partner</span>
-           <span class="sponsor-desc">This space contains paid advertising and is separate from the wheel tool.</span>
-          </div>
-          <a href="contact.html" class="sponsor-link">Sponsor this wheel &rarr;</a>
-        </div>
-      </div>
-    </aside>
-  </section>
-
-  <section class="hero">
+  <!-- 1. The Wheel is FIRST on the homepage -->
+  <section class="hero" id="wheelSection">
     <div class="wrap hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="dot"></span> Free · No signup · Instant</p>
+      <div class="hero-header">
+        <span class="eyebrow"><span class="dot"></span> Free · Instant · Fair Random Picker</span>
         <h1 class="hero-title">Spin the Wheel.<br><span class="hl">Let chance decide.</span></h1>
-        <p class="hero-sub">vectricSpin is a clean, fast random decision maker for dinners, giveaways, classrooms, and game nights. Type your options, hit spin, get an honest answer.</p>
-
-        <div class="controls">
-          <div class="presets" role="group" aria-label="Presets">
-            <button type="button" class="chip" data-preset="yesno">Yes / No</button>
-            <button type="button" class="chip is-active" data-preset="food">Food</button>
-            <button type="button" class="chip" data-preset="truth">Truth or Dare</button>
-            <button type="button" class="chip" data-preset="numbers">1–6</button>
-          </div>
-          <label for="optionsInput" class="field-label">Your options <span>(one per line or comma separated)</span></label>
-          <textarea id="optionsInput" class="textarea" rows="5" spellcheck="false" placeholder="Pizza, Burger, Sushi, Tacos, Salad"></textarea>
-          <div class="actions">
-            <button type="button" id="spinBtn" class="btn btn-primary">Spin the wheel</button>
-            <button type="button" id="stopBtn" class="btn btn-stop" disabled>Stop</button>
-            <button type="button" id="resetBtn" class="btn btn-ghost">Reset</button>
-            <button type="button" id="shareBtn" class="btn btn-share">Share wheel</button>
-          </div>
-        </div>
+        <p class="hero-sub">Tap the wheel or click Spin to get an honest, unbiased answer in seconds.</p>
       </div>
 
       <div class="wheel-stage" id="wheelStage">
@@ -629,15 +831,80 @@ kbd{
             </svg>
           </div>
           <canvas id="wheel" class="wheel" width="600" height="600" role="button" tabindex="0"
-                  aria-label="Interactive decision wheel. Click, flick, or press Space to spin."></canvas>
+                  aria-label="Interactive decision wheel. Click or press Space to spin."></canvas>
         </div>
 
+        <!-- Primary Spin Controls -->
+        <div class="wheel-controls">
+          <button type="button" id="spinBtn" class="btn btn-primary btn-spin-main">
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Spin the wheel
+          </button>
+          <button type="button" id="stopBtn" class="btn btn-stop" disabled>Stop</button>
+        </div>
+
+        <!-- Result announcement -->
         <div class="result" id="resultBox" role="status" aria-live="polite">
-          <span class="result-k">Result</span>
+          <span class="result-k">Selected Winner</span>
           <span class="result-v" id="resultText">Ready when you are</span>
         </div>
 
-        <p class="hint">Tap the wheel or press <kbd>Space</kbd> to spin or stop</p>
+        <!-- Share button below the wheel -->
+        <div class="wheel-sub-bar">
+          <button type="button" id="shareBtn" class="btn btn-share" aria-label="Share this wheel with options">
+            <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Share this wheel
+          </button>
+          <button type="button" id="toggleCustomizeBtn" class="btn btn-customize" aria-expanded="false" aria-controls="optionsEditor">
+            <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            <span id="customizeBtnLabel">Customize options ↓</span>
+          </button>
+        </div>
+
+        <p class="hint">Click the wheel, press <kbd>Space</kbd>, or tap Spin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Options Editor (clean & simple, hidden until user clicks Customize Options) -->
+  <section class="editor-section wrap" id="optionsEditor" hidden>
+    <div class="editor-card">
+      <div class="editor-head">
+        <div class="editor-title-group">
+          <h2 class="editor-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon></svg>
+            Customize Options
+          </h2>
+          <div class="editor-head-actions">
+            <span class="options-badge" id="optionsCountBadge">8 options</span>
+            <button type="button" id="closeEditorBtn" class="btn-close-editor" title="Hide customize section" aria-label="Close customize section">&times; Close</button>
+          </div>
+        </div>
+        <p class="editor-desc">Type, edit, or paste your choices below (one per line). The wheel updates live as you type.</p>
+      </div>
+
+      <!-- Single, clean textarea for options -->
+      <div class="editor-block">
+        <label for="optionsInput" class="block-label">Choices <span>(one choice per line)</span></label>
+        <textarea id="optionsInput" class="textarea" rows="7" spellcheck="false" placeholder="Enter one choice per line..."></textarea>
+      </div>
+
+      <!-- Utility Toolbar -->
+      <div class="editor-toolbar">
+        <div class="tool-group">
+          <button type="button" id="shuffleBtn" class="btn-tool" title="Randomize choices order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+            Shuffle
+          </button>
+          <button type="button" id="clearBtn" class="btn-tool btn-tool-clear" title="Clear all choices">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            Clear
+          </button>
+        </div>
+        <button type="button" id="spinFromEditorBtn" class="btn btn-spin-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Spin the wheel ⬆
+        </button>
       </div>
     </div>
   </section>
@@ -675,7 +942,7 @@ kbd{
     <div class="faq">
       <details><summary>Is the vectricSpin outcome really random?</summary><p>Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias.</p></details>
        <details><summary>How long does each spin take?</summary><p>About 8 to 10 seconds. The exact duration is randomized every time. The wheel decelerates continuously, then eases into the final answer instead of stopping abruptly. You can also press the Stop button at any moment to slow and halt the wheel earlier.</p></details>
-      <details><summary>Can I spin or stop without the button?</summary><p>Yes. Click or tap the wheel directly, flick it on a touchscreen, click the center hub, or press the <kbd>Space</kbd> bar to both spin and stop the wheel.</p></details>
+      <details><summary>Can I spin or stop without the button?</summary><p>Yes. Click or tap the wheel directly, click the center hub, or press the <kbd>Space</kbd> bar to both spin and stop the wheel.</p></details>
       <details><summary>Are my options saved?</summary><p>Yes, they are stored locally on your device using HTML5 localStorage. Nothing leaves your browser.</p></details>
       <details><summary>Is there a limit on how many options I can add?</summary><p>You can add from two options up to dozens. Slice angles and label sizes adjust automatically to stay readable.</p></details>
       <details><summary>Does it work offline?</summary><p>Once the page has loaded, vectricSpin keeps working without an internet connection.</p></details>
@@ -700,6 +967,60 @@ kbd{
     <p class="footer-copy">© 2026 vectricSpin · vectric.online · All rights reserved.</p>
   </div>
 </footer>
+
+<!-- Fullscreen Sponsored Ad Interstitial (5-Sec Skip to Spin) -->
+<div id="fullscreenAdOverlay" class="fullscreen-ad-overlay" role="dialog" aria-modal="true" aria-label="Sponsored Announcement" style="display:none;">
+  <div class="fullscreen-ad-backdrop" id="fullscreenAdBackdrop"></div>
+  <div class="fullscreen-ad-modal" role="document">
+    <div class="fullscreen-ad-topbar">
+      <div class="ad-brand-tag">
+        <span class="ad-live-dot"></span>
+        <span>SPONSORED AD</span>
+      </div>
+      <div class="fullscreen-ad-actions">
+        <button type="button" id="adSkipBtn" class="btn-ad-skip" disabled aria-live="polite">
+          <span class="skip-timer-icon" aria-hidden="true">⏱</span>
+          <span id="adSkipCountdown">Skip in 5s</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="fullscreen-ad-progress" aria-hidden="true">
+      <div id="adProgressFill" class="fullscreen-ad-progress-fill"></div>
+    </div>
+
+    <div class="fullscreen-ad-body">
+      <div class="fullscreen-ad-card">
+        <div class="ad-head">
+          <span class="ad-label">SPONSORED PARTNER</span>
+          <span class="ad-hint">Keeps vectricSpin 100% Free</span>
+        </div>
+        <div class="ad-content ad-content-fullscreen">
+          <div id="container-90290a73d0f302872b0b460384cf280f"></div>
+          <script async="async" data-cfasync="false" src="https://pl29661013.profitableratecpmnetwork.com/90290a73d0f302872b0b460384cf280f/invoke.js"></script>
+
+          <div class="sponsor-placeholder" id="sponsorPlaceholder">
+            <span class="sponsor-badge">SPONSORED</span>
+            <div class="sponsor-info">
+              <span class="sponsor-title">Sponsored placement from a vectric<span class="brand-accent">Spin</span> partner</span>
+              <span class="sponsor-desc">This brief break supports fast, free random wheel spinning for everyone.</span>
+            </div>
+            <a href="contact.html" class="sponsor-link">Sponsor this wheel &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="fullscreen-ad-footer-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+        <span>The wheel will start spinning immediately when you skip this ad.</span>
+      </div>
+    </div>
+
+    <div class="fullscreen-ad-bottom-bar">
+      <button type="button" id="adCancelBtn" class="btn-ad-cancel">Cancel (don't spin)</button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -726,15 +1047,29 @@ kbd{
   var canvas    = document.getElementById('wheel');
   var ctx       = canvas.getContext('2d');
   var input     = document.getElementById('optionsInput');
+  var countBadge= document.getElementById('optionsCountBadge');
+  var shuffleBtn= document.getElementById('shuffleBtn');
+  var clearBtn  = document.getElementById('clearBtn');
+  var spinFromEditorBtn = document.getElementById('spinFromEditorBtn');
+  var optionsEditor     = document.getElementById('optionsEditor');
+  var toggleCustomizeBtn= document.getElementById('toggleCustomizeBtn');
+  var closeEditorBtn    = document.getElementById('closeEditorBtn');
+  var customizeBtnLabel = document.getElementById('customizeBtnLabel');
   var spinBtn   = document.getElementById('spinBtn');
   var stopBtn   = document.getElementById('stopBtn');
   var resetBtn  = document.getElementById('resetBtn');
   var shareBtn  = document.getElementById('shareBtn');
   var resultTxt = document.getElementById('resultText');
-  var chips     = document.querySelectorAll('.chip');
   var burger    = document.getElementById('burger');
   var mobileNav = document.getElementById('mobileNav');
   var wheelStage= document.getElementById('wheelStage');
+  var fullscreenAdOverlay = document.getElementById('fullscreenAdOverlay');
+  var adSkipBtn           = document.getElementById('adSkipBtn');
+  var adProgressFill      = document.getElementById('adProgressFill');
+  var adCancelBtn         = document.getElementById('adCancelBtn');
+  var adBackdrop          = document.getElementById('fullscreenAdBackdrop');
+  var adTimerInterval     = null;
+  var isAdActive          = false;
 
   var options   = [];
   var offscreen = null;
@@ -842,6 +1177,9 @@ kbd{
   function rebuild() {
     options = parseOptions(input.value);
     if (options.length < 2) options = ['Yes', 'No'];
+    if (countBadge) {
+      countBadge.textContent = options.length + (options.length === 1 ? ' option' : ' options');
+    }
     offscreen = buildOffscreen(options);
     rotation = 0;
     fitCanvas();
@@ -856,22 +1194,123 @@ kbd{
     wheelStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  var POPUP_COOLDOWN_MS = 2 * 60 * 1000;
-  var POPUP_LAST_SHOWN_KEY = 'vectricspin.popupLastShown';
+  function setCustomizeOpen(open, shouldScroll) {
+    if (!optionsEditor) return;
+    if (open) {
+      optionsEditor.removeAttribute('hidden');
+      optionsEditor.classList.add('is-open');
+      if (toggleCustomizeBtn) {
+        toggleCustomizeBtn.setAttribute('aria-expanded', 'true');
+        toggleCustomizeBtn.classList.add('is-active');
+      }
+      if (customizeBtnLabel) {
+        customizeBtnLabel.textContent = 'Hide options ↑';
+      }
+      if (shouldScroll) {
+        setTimeout(function () {
+          optionsEditor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (input) input.focus();
+        }, 60);
+      }
+    } else {
+      optionsEditor.setAttribute('hidden', '');
+      optionsEditor.classList.remove('is-open');
+      if (toggleCustomizeBtn) {
+        toggleCustomizeBtn.setAttribute('aria-expanded', 'false');
+        toggleCustomizeBtn.classList.remove('is-active');
+      }
+      if (customizeBtnLabel) {
+        customizeBtnLabel.textContent = 'Customize options ↓';
+      }
+    }
+  }
 
-  function triggerPopupAd() {
-    try {
-      var lastShown = Number(localStorage.getItem(POPUP_LAST_SHOWN_KEY) || 0);
-      if (Date.now() - lastShown < POPUP_COOLDOWN_MS) return;
+  function toggleCustomize() {
+    if (!optionsEditor) return;
+    var isOpen = !optionsEditor.hasAttribute('hidden');
+    setCustomizeOpen(!isOpen, !isOpen);
+  }
 
-      localStorage.setItem(POPUP_LAST_SHOWN_KEY, String(Date.now()));
-      var s = document.createElement('script');
-      s.id = 'vectric-popup-ad';
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://pl29661129.profitableratecpmnetwork.com/55/b7/26/55b726eacea5584011957659ebe40aac.js';
-      document.body.appendChild(s);
-    } catch (e) {}
+  function showFullscreenAd() {
+    if (!fullscreenAdOverlay) {
+      startActualSpin();
+      return;
+    }
+
+    if (adTimerInterval) {
+      clearInterval(adTimerInterval);
+      adTimerInterval = null;
+    }
+
+    isAdActive = true;
+    var durationMs = 5000;
+    var startTime = Date.now();
+
+    if (adProgressFill) adProgressFill.style.width = '0%';
+    if (adSkipBtn) {
+      adSkipBtn.disabled = true;
+      adSkipBtn.classList.remove('can-skip');
+      adSkipBtn.innerHTML = '<span class="skip-timer-icon" aria-hidden="true">⏱</span> <span id="adSkipCountdown">Skip in 5s</span>';
+    }
+
+    fullscreenAdOverlay.style.display = 'flex';
+    void fullscreenAdOverlay.offsetHeight;
+    fullscreenAdOverlay.classList.add('is-visible');
+    document.body.style.overflow = 'hidden';
+
+    adTimerInterval = setInterval(function () {
+      var elapsed = Date.now() - startTime;
+      var remaining = Math.max(0, Math.ceil((durationMs - elapsed) / 1000));
+      var pct = Math.min(100, (elapsed / durationMs) * 100);
+
+      if (adProgressFill) {
+        adProgressFill.style.width = pct + '%';
+      }
+
+      if (remaining > 0) {
+        var cdElem = document.getElementById('adSkipCountdown');
+        if (cdElem) {
+          cdElem.textContent = 'Skip in ' + remaining + 's';
+        }
+      } else {
+        clearInterval(adTimerInterval);
+        adTimerInterval = null;
+        if (adProgressFill) adProgressFill.style.width = '100%';
+        if (adSkipBtn) {
+          adSkipBtn.disabled = false;
+          adSkipBtn.classList.add('can-skip');
+          adSkipBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> <span>Skip Ad & Spin Wheel &rarr;</span>';
+          adSkipBtn.focus();
+        }
+      }
+    }, 120);
+  }
+
+  function dismissFullscreenAd(shouldSpin) {
+    if (adTimerInterval) {
+      clearInterval(adTimerInterval);
+      adTimerInterval = null;
+    }
+    isAdActive = false;
+    document.body.style.overflow = '';
+
+    if (fullscreenAdOverlay) {
+      fullscreenAdOverlay.classList.remove('is-visible');
+      setTimeout(function () {
+        if (!fullscreenAdOverlay.classList.contains('is-visible')) {
+          fullscreenAdOverlay.style.display = 'none';
+        }
+      }, 240);
+    }
+
+    if (shouldSpin) {
+      startActualSpin();
+    }
+  }
+
+  function requestSpin() {
+    if (spinning) return;
+    showFullscreenAd();
   }
 
   function getShareUrl() {
@@ -883,11 +1322,11 @@ kbd{
 
   function showShareFeedback(message) {
     if (!shareBtn) return;
-    var originalLabel = shareBtn.textContent;
-    shareBtn.textContent = message;
+    var originalHTML = shareBtn.innerHTML;
+    shareBtn.innerHTML = '<span class="btn-icon">✓</span> ' + message;
     shareBtn.disabled = true;
     setTimeout(function () {
-      shareBtn.textContent = originalLabel;
+      shareBtn.innerHTML = originalHTML;
       shareBtn.disabled = false;
     }, 2200);
   }
@@ -941,9 +1380,8 @@ kbd{
       .catch(function () { showShareFeedback('Copy failed'); });
   }
 
-  function spin() {
+  function startActualSpin() {
     if (spinning) return;
-    triggerPopupAd();
     spinning = true;
     isStopping = false;
     spinBtn.disabled = true;
@@ -1063,7 +1501,7 @@ kbd{
     if (spinning) {
       if (!isStopping) stopWheel();
     } else {
-      spin();
+      requestSpin();
     }
   }
 
@@ -1072,47 +1510,87 @@ kbd{
     rebuild();
   });
 
-  spinBtn.addEventListener('click', spin);
+  spinBtn.addEventListener('click', requestSpin);
   if (stopBtn) stopBtn.addEventListener('click', stopWheel);
   if (shareBtn) shareBtn.addEventListener('click', shareWheel);
 
-  resetBtn.addEventListener('click', function () {
-    input.value = PRESETS.food.join('\n');
-    try { localStorage.setItem('vectricspin.options', input.value); } catch (e) {}
-    chips.forEach(function (c) {
-      c.classList.toggle('is-active', c.dataset.preset === 'food');
+  if (adSkipBtn) {
+    adSkipBtn.addEventListener('click', function () {
+      if (adSkipBtn.disabled) return;
+      dismissFullscreenAd(true);
     });
-    rebuild();
-    resultTxt.textContent = 'Ready when you are';
-  });
+  }
 
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var key = chip.dataset.preset;
-      if (!PRESETS[key]) return;
-      input.value = PRESETS[key].join('\n');
-      try { localStorage.setItem('vectricspin.options', input.value); } catch (e) {}
-      chips.forEach(function (c) { c.classList.remove('is-active'); });
-      chip.classList.add('is-active');
-      rebuild();
-      resultTxt.textContent = 'Ready when you are';
+  if (adCancelBtn) {
+    adCancelBtn.addEventListener('click', function () {
+      dismissFullscreenAd(false);
     });
-  });
+  }
+
+  if (adBackdrop) {
+    adBackdrop.addEventListener('click', function () {
+      // Intentional no-op to keep modal focused
+    });
+  }
+
+  if (shuffleBtn) {
+    shuffleBtn.addEventListener('click', function () {
+      var list = parseOptions(input.value);
+      for (var i = list.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = list[i];
+        list[i] = list[j];
+        list[j] = temp;
+      }
+      input.value = list.join('\n');
+      try { localStorage.setItem('vectricspin.options', input.value); } catch (e) {}
+      rebuild();
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      input.value = '';
+      try { localStorage.setItem('vectricspin.options', ''); } catch (e) {}
+      rebuild();
+      if (input) input.focus();
+    });
+  }
+
+  if (spinFromEditorBtn) {
+    spinFromEditorBtn.addEventListener('click', function () {
+      scrollToWheel();
+      requestSpin();
+    });
+  }
+
+  if (toggleCustomizeBtn) {
+    toggleCustomizeBtn.addEventListener('click', toggleCustomize);
+  }
+
+  if (closeEditorBtn) {
+    closeEditorBtn.addEventListener('click', function () {
+      setCustomizeOpen(false, false);
+      if (toggleCustomizeBtn) toggleCustomizeBtn.focus();
+    });
+  }
 
   canvas.addEventListener('click', handleWheelAction);
 
-  var touchStartY = 0, touchStartT = 0;
-  canvas.addEventListener('touchstart', function (e) {
-    touchStartY = e.touches[0].clientY;
-    touchStartT = Date.now();
-  }, { passive: true });
-  canvas.addEventListener('touchend', function (e) {
-    var dy = e.changedTouches[0].clientY - touchStartY;
-    var dt = Date.now() - touchStartT;
-    if (Math.abs(dy) > 30 && dt < 600) handleWheelAction();
-  }, { passive: true });
-
   document.addEventListener('keydown', function (e) {
+    if (isAdActive) {
+      if (e.key === 'Escape') {
+        dismissFullscreenAd(false);
+        return;
+      }
+      if ((e.code === 'Space' || e.key === 'Enter') && adSkipBtn && !adSkipBtn.disabled) {
+        e.preventDefault();
+        dismissFullscreenAd(true);
+        return;
+      }
+      return;
+    }
+
     if (e.code === 'Space' && document.activeElement !== input) {
       e.preventDefault();
       handleWheelAction();
@@ -1134,12 +1612,32 @@ kbd{
   });
 
   (function init() {
+    if ('scrollRestoration' in history) {
+      try { history.scrollRestoration = 'manual'; } catch (e) {}
+    }
+
+    if (window.location.hash === '#optionsEditor') {
+      try {
+        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+      } catch (e) {}
+    }
+
+    window.scrollTo(0, 0);
+
     var saved = '';
     var sharedOptions = '';
     try { saved = localStorage.getItem('vectricspin.options') || ''; } catch (e) {}
     try { sharedOptions = new URLSearchParams(window.location.search).get('options') || ''; } catch (e) {}
     input.value = sharedOptions || saved || PRESETS.food.join('\n');
     rebuild();
+
+    // Ensure customize editor starts strictly closed on page load
+    setCustomizeOpen(false, false);
+
+    // Scroll to the very beginning of the homepage
+    setTimeout(function () {
+      window.scrollTo(0, 0);
+    }, 0);
   })();
 
   (function initSponsorAd() {

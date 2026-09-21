@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
+Allow: /favicon*
+Allow: /apple-touch-icon*
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.ico$
+Allow: /site.webmanifest
+Allow: /sitemap.xml
+Allow: /llms.txt
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /favicon*
+Allow: /apple-touch-icon*
+
+User-agent: Bingbot
+Allow: /
 
 Sitemap: https://vectric.online/sitemap.xml
+Host: https://vectric.online

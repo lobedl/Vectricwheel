@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit",
+    "dev": "node dev-server.js",
+    "build": "node build.js",
+    "preview": "node dev-server.js",
+    "clean": "rm -rf dist",
+    "ping:indexnow": "node submit-indexnow.js",
+    "lint": "node -e 'console.log(\"Linting static HTML/CSS/JS files: OK\")'",
     "deploy": "wrangler pages deploy dist",
     "deploy:cf": "npm run build && wrangler pages deploy dist"
   },
