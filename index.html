@@ -35,6 +35,9 @@
 <meta name="twitter:description" content="Free online spin the wheel tool. Fast, fair, mobile friendly.">
 <meta name="twitter:image" content="https://vectric.online/og-image.png">
 <meta name="twitter:image:alt" content="vectricSpin spin the wheel random decision maker">
+<meta name="application-name" content="vectricSpin">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="144x144" href="/favicon-144x144.png">
@@ -89,7 +92,7 @@
       "@id":"https://vectric.online/#faq",
       "mainEntity":[
         {"@type":"Question","name":"Is the vectricSpin outcome truly random?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias."}},
-        {"@type":"Question","name":"How long does a vectricSpin last?","acceptedAnswer":{"@type":"Answer","text":"Each spin runs for about 8 to 10 seconds, chosen randomly each time. The wheel decelerates smoothly and eases into the final answer."}},
+        {"@type":"Question","name":"How long does a vectricSpin last?","acceptedAnswer":{"@type":"Answer","text":"Each spin runs for about 15 to 30 seconds, chosen randomly each time. The wheel decelerates smoothly and eases into the final answer."}},
         {"@type":"Question","name":"Can I spin without clicking the button?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tap the wheel directly, flick it on a touchscreen, click the center hub, or press the Spacebar."}},
         {"@type":"Question","name":"Are my options saved?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your list is stored locally on your device using HTML5 localStorage. Nothing is uploaded to a server."}},
         {"@type":"Question","name":"Is vectricSpin free?","acceptedAnswer":{"@type":"Answer","text":"Yes, it is completely free with unlimited spins and no account required."}}
@@ -917,7 +920,7 @@ kbd{
 
     <h3>How vectricSpin works</h3>
     <p>The wheel splits your list into equal slices, so every option carries the exact same mathematical probability. Whether you enter two choices or twenty, vectricSpin allocates each item an identical angular arc and picks a winner using your browser's built-in pseudorandom number generator. That means a spin for "pizza vs sushi" is statistically just as fair as a spin for ten different dinner ideas.</p>
-     <p>Unlike most online wheels that stop after a few seconds, vectricSpin uses a smooth friction-inspired motion model. Every spin runs for about <strong>8 to 10 seconds</strong>, chosen at random each time. The wheel starts fast, decelerates continuously, and eases gently into its final answer — the pointer clicks past one segment at a time until it lands. There is no constant-speed blur or abrupt stop.</p>
+     <p>Unlike most online wheels that stop after a few seconds, vectricSpin uses a smooth friction-inspired motion model. Every spin runs for about <strong>15 to 30 seconds</strong>, chosen at random each time. The wheel starts fast, decelerates continuously, and eases gently into its final answer — the pointer clicks past one segment at a time until it lands. There is no constant-speed blur or abrupt stop.</p>
 
     <h3>Ways people use vectricSpin every day</h3>
     <ul class="usecases">
@@ -941,7 +944,7 @@ kbd{
     <h3>Frequently asked questions</h3>
     <div class="faq">
       <details><summary>Is the vectricSpin outcome really random?</summary><p>Yes. Each option receives an equal arc, and the final angle is chosen using the browser's standard pseudorandom generator. There is no weighting or hidden bias.</p></details>
-       <details><summary>How long does each spin take?</summary><p>About 8 to 10 seconds. The exact duration is randomized every time. The wheel decelerates continuously, then eases into the final answer instead of stopping abruptly. You can also press the Stop button at any moment to slow and halt the wheel earlier.</p></details>
+       <details><summary>How long does each spin take?</summary><p>About 15 to 30 seconds. The exact duration is randomized every time. The wheel decelerates continuously, then eases into the final answer instead of stopping abruptly. You can also press the Stop button at any moment to slow and halt the wheel earlier.</p></details>
       <details><summary>Can I spin or stop without the button?</summary><p>Yes. Click or tap the wheel directly, click the center hub, or press the <kbd>Space</kbd> bar to both spin and stop the wheel.</p></details>
       <details><summary>Are my options saved?</summary><p>Yes, they are stored locally on your device using HTML5 localStorage. Nothing leaves your browser.</p></details>
       <details><summary>Is there a limit on how many options I can add?</summary><p>You can add from two options up to dozens. Slice angles and label sizes adjust automatically to stay readable.</p></details>
@@ -1079,6 +1082,12 @@ kbd{
   var animFrameId = null;
   var currentOmega = 0;
   var dpr       = Math.min(window.devicePixelRatio || 1, 2);
+  var spinAudio = {
+    context: null,
+    master: null,
+    lastTickAt: 0,
+    lastTickIndex: null
+  };
 
   function parseOptions(raw) {
     return raw.split(/[\n,]+/).map(function (s) { return s.trim(); })
@@ -1192,6 +1201,75 @@ kbd{
     var headerH = 80;
     if (rect.top >= headerH && rect.bottom <= window.innerHeight) return;
     wheelStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /*
+   * The sound is generated locally so the site does not need an audio asset.
+   * A short pointer tick is emitted when the wheel crosses a segment. The
+   * minimum gap, pitch, and volume all follow angular velocity.
+   */
+  function primeSpinAudio() {
+    var AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextCtor) return;
+
+    try {
+      if (!spinAudio.context) {
+        spinAudio.context = new AudioContextCtor();
+        spinAudio.master = spinAudio.context.createGain();
+        spinAudio.master.gain.value = 0.16;
+        spinAudio.master.connect(spinAudio.context.destination);
+      }
+      if (spinAudio.context.state === 'suspended') {
+        var resumePromise = spinAudio.context.resume();
+        if (resumePromise && resumePromise.catch) resumePromise.catch(function () {});
+      }
+    } catch (e) {
+      spinAudio.context = null;
+      spinAudio.master = null;
+    }
+  }
+
+  function playSpinTick(omega) {
+    var audioContext = spinAudio.context;
+    if (!audioContext || !spinAudio.master || audioContext.state !== 'running') return;
+
+    var speed = Math.min(1, Math.abs(omega) / 18);
+    var now = audioContext.currentTime;
+    var minimumGap = 0.045 + (1 - speed) * 0.095;
+    if (now - spinAudio.lastTickAt < minimumGap) return;
+    spinAudio.lastTickAt = now;
+
+    try {
+      var oscillator = audioContext.createOscillator();
+      var tickGain = audioContext.createGain();
+      var volume = 0.025 + speed * 0.055;
+      var pitch = 520 + speed * 780;
+
+      oscillator.type = 'triangle';
+      oscillator.frequency.setValueAtTime(pitch, now);
+      oscillator.frequency.exponentialRampToValueAtTime(180, now + 0.055);
+      tickGain.gain.setValueAtTime(0.0001, now);
+      tickGain.gain.exponentialRampToValueAtTime(volume, now + 0.004);
+      tickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.065);
+      oscillator.connect(tickGain);
+      tickGain.connect(spinAudio.master);
+      oscillator.start(now);
+      oscillator.stop(now + 0.07);
+    } catch (e) {}
+  }
+
+  function updateSpinAudio(rot, omega) {
+    if (!options.length) return;
+    var arc = (Math.PI * 2) / options.length;
+    var tickIndex = Math.floor((rot + arc / 2) / arc);
+    if (spinAudio.lastTickIndex === null) {
+      spinAudio.lastTickIndex = tickIndex;
+      return;
+    }
+    if (tickIndex !== spinAudio.lastTickIndex) {
+      spinAudio.lastTickIndex = tickIndex;
+      playSpinTick(omega);
+    }
   }
 
   function setCustomizeOpen(open, shouldScroll) {
@@ -1310,6 +1388,7 @@ kbd{
 
   function requestSpin() {
     if (spinning) return;
+    primeSpinAudio();
     showFullscreenAd();
   }
 
@@ -1397,13 +1476,14 @@ kbd{
 
     var startRot = rotation;
 
-    /* Random duration: 8 to 10 seconds, with a soft landing */
-    var durationMs  = 8000 + Math.random() * 2000;   // 8s – 10s randomly
+    /* Random duration: 15 to 30 seconds, with a long physical slowdown. */
+    var durationMs  = 15000 + Math.random() * 15000; // 15s – 30s randomly
     var durationSec = durationMs / 1000;
 
-    /* Keep the wheel lively while leaving enough time for a clear slowdown */
-    var rotations = 10 + durationSec * 0.3;
+    /* More turns for longer spins, while keeping the final crawl visible. */
+    var rotations = 12 + durationSec * 0.28;
     var totalRad  = rotations * Math.PI * 2 + Math.random() * Math.PI * 2;
+    spinAudio.lastTickIndex = Math.floor((startRot + ((Math.PI * 2) / options.length) / 2) / ((Math.PI * 2) / options.length));
 
     var startTime = performance.now();
 
@@ -1412,13 +1492,17 @@ kbd{
 
       var tSec = Math.min((now - startTime) / 1000, durationSec);
       var progress = tSec / durationSec;
-      /* Quintic ease-out reaches zero velocity at the final frame. */
-      var eased = 1 - Math.pow(1 - progress, 5);
+      /*
+       * This cubic friction curve starts with a strong push, sheds speed
+       * continuously, and reaches zero velocity exactly at the landing.
+       */
+      var eased = 1 - Math.pow(1 - progress, 3.2);
       var nextRot = startRot + totalRad * eased;
       currentOmega = (nextRot - rotation) / Math.max(0.001, (now - (frame.lastNow || startTime)) / 1000);
       rotation = nextRot;
       frame.lastNow = now;
 
+      updateSpinAudio(rotation, currentOmega);
       draw(rotation);
 
       if (tSec < durationSec) {
@@ -1446,9 +1530,9 @@ kbd{
     resultTxt.textContent = 'Slowing to a stop…';
 
     var stopStartRot = rotation;
-    /* Give a manual stop a visible, smooth 1.6–2.3 second landing. */
-    var safeOmega = Math.max(currentOmega, 2.5);
-    var brakeDuration = Math.min(2.3, Math.max(1.6, safeOmega * 0.12));
+    /* Preserve momentum, then apply a gradual 2.4–4.8 second brake. */
+    var safeOmega = Math.max(currentOmega, 3.5);
+    var brakeDuration = Math.min(4.8, Math.max(2.4, 2 + safeOmega * 0.14));
     var brakeDistance = safeOmega * (brakeDuration * 0.5);
     var brakeStart = performance.now();
 
@@ -1458,6 +1542,8 @@ kbd{
       /* Smooth quadratic ease-out deceleration curve */
       var ease = 1 - Math.pow(1 - p, 2);
       rotation = stopStartRot + brakeDistance * ease;
+      currentOmega = safeOmega * (1 - p);
+      updateSpinAudio(rotation, currentOmega);
       draw(rotation);
 
       if (p < 1) {
@@ -1470,6 +1556,7 @@ kbd{
   }
 
   function finish() {
+    currentOmega = 0;
     spinning = false;
     isStopping = false;
     if (animFrameId) {
