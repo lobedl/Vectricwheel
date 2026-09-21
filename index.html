@@ -36,6 +36,7 @@
 <meta name="twitter:image" content="https://vectric.online/og-image.png">
 <meta name="twitter:image:alt" content="vectricSpin spin the wheel random decision maker">
 <meta name="application-name" content="vectricSpin">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -1085,9 +1086,13 @@ kbd{
   var spinAudio = {
     context: null,
     master: null,
+    motor: null,
+    motorGain: null,
+    motorFilter: null,
     lastTickAt: 0,
     lastTickIndex: null
   };
+  var pendingSpinScroll = false;
 
   function parseOptions(raw) {
     return raw.split(/[\n,]+/).map(function (s) { return s.trim(); })
@@ -1216,7 +1221,7 @@ kbd{
       if (!spinAudio.context) {
         spinAudio.context = new AudioContextCtor();
         spinAudio.master = spinAudio.context.createGain();
-        spinAudio.master.gain.value = 0.16;
+        spinAudio.master.gain.value = 0.35;
         spinAudio.master.connect(spinAudio.context.destination);
       }
       if (spinAudio.context.state === 'suspended') {
@@ -1227,6 +1232,61 @@ kbd{
       spinAudio.context = null;
       spinAudio.master = null;
     }
+  }
+
+  function beginSpinAudio() {
+    var audioContext = spinAudio.context;
+    if (!audioContext || !spinAudio.master) return;
+
+    function startMotor() {
+      if (!spinning || !spinAudio.context || spinAudio.motor) return;
+      try {
+        var now = audioContext.currentTime;
+        var motor = audioContext.createOscillator();
+        var motorFilter = audioContext.createBiquadFilter();
+        var motorGain = audioContext.createGain();
+
+        motor.type = 'sawtooth';
+        motor.frequency.setValueAtTime(72, now);
+        motorFilter.type = 'lowpass';
+        motorFilter.frequency.setValueAtTime(900, now);
+        motorFilter.Q.setValueAtTime(0.7, now);
+        motorGain.gain.setValueAtTime(0.0001, now);
+        motorGain.gain.exponentialRampToValueAtTime(0.035, now + 0.08);
+
+        motor.connect(motorFilter);
+        motorFilter.connect(motorGain);
+        motorGain.connect(spinAudio.master);
+        motor.start(now);
+
+        spinAudio.motor = motor;
+        spinAudio.motorGain = motorGain;
+        spinAudio.motorFilter = motorFilter;
+      } catch (e) {}
+    }
+
+    if (audioContext.state === 'suspended') {
+      var resumePromise = audioContext.resume();
+      if (resumePromise && resumePromise.then) {
+        resumePromise.then(startMotor).catch(function () {});
+      }
+    } else {
+      startMotor();
+    }
+  }
+
+  function updateMotorAudio(omega) {
+    var audioContext = spinAudio.context;
+    if (!audioContext || !spinAudio.motor || !spinAudio.motorGain || !spinAudio.motorFilter) return;
+
+    var speed = Math.min(1, Math.abs(omega) / 18);
+    var now = audioContext.currentTime;
+    var motorGain = 0.025 + speed * 0.09;
+    var motorPitch = 55 + speed * 150;
+
+    spinAudio.motor.frequency.setTargetAtTime(motorPitch, now, 0.035);
+    spinAudio.motorGain.gain.setTargetAtTime(motorGain, now, 0.045);
+    spinAudio.motorFilter.frequency.setTargetAtTime(500 + speed * 1000, now, 0.05);
   }
 
   function playSpinTick(omega) {
@@ -1242,7 +1302,7 @@ kbd{
     try {
       var oscillator = audioContext.createOscillator();
       var tickGain = audioContext.createGain();
-      var volume = 0.025 + speed * 0.055;
+      var volume = 0.08 + speed * 0.13;
       var pitch = 520 + speed * 780;
 
       oscillator.type = 'triangle';
@@ -1260,6 +1320,7 @@ kbd{
 
   function updateSpinAudio(rot, omega) {
     if (!options.length) return;
+    updateMotorAudio(omega);
     var arc = (Math.PI * 2) / options.length;
     var tickIndex = Math.floor((rot + arc / 2) / arc);
     if (spinAudio.lastTickIndex === null) {
@@ -1270,6 +1331,24 @@ kbd{
       spinAudio.lastTickIndex = tickIndex;
       playSpinTick(omega);
     }
+  }
+
+  function stopSpinAudio() {
+    var audioContext = spinAudio.context;
+    var motor = spinAudio.motor;
+    var motorGain = spinAudio.motorGain;
+    if (!audioContext || !motor || !motorGain) return;
+
+    try {
+      var now = audioContext.currentTime;
+      motorGain.gain.cancelScheduledValues(now);
+      motorGain.gain.setTargetAtTime(0.0001, now, 0.06);
+      motor.stop(now + 0.28);
+    } catch (e) {}
+
+    spinAudio.motor = null;
+    spinAudio.motorGain = null;
+    spinAudio.motorFilter = null;
   }
 
   function setCustomizeOpen(open, shouldScroll) {
@@ -1309,9 +1388,11 @@ kbd{
     setCustomizeOpen(!isOpen, !isOpen);
   }
 
-  function showFullscreenAd() {
+  function showFullscreenAd(shouldScroll) {
+    pendingSpinScroll = Boolean(shouldScroll);
     if (!fullscreenAdOverlay) {
-      startActualSpin();
+      startActualSpin(pendingSpinScroll);
+      pendingSpinScroll = false;
       return;
     }
 
@@ -1382,14 +1463,19 @@ kbd{
     }
 
     if (shouldSpin) {
-      startActualSpin();
+      var shouldScroll = pendingSpinScroll;
+      pendingSpinScroll = false;
+      startActualSpin(shouldScroll);
+    } else {
+      pendingSpinScroll = false;
     }
   }
 
-  function requestSpin() {
+  function requestSpin(shouldScroll) {
     if (spinning) return;
+    shouldScroll = shouldScroll === true;
     primeSpinAudio();
-    showFullscreenAd();
+    showFullscreenAd(shouldScroll);
   }
 
   function getShareUrl() {
@@ -1459,7 +1545,7 @@ kbd{
       .catch(function () { showShareFeedback('Copy failed'); });
   }
 
-  function startActualSpin() {
+  function startActualSpin(shouldScroll) {
     if (spinning) return;
     spinning = true;
     isStopping = false;
@@ -1472,7 +1558,8 @@ kbd{
     }
     resultTxt.textContent = 'Spinning…';
 
-    scrollToWheel();
+    if (shouldScroll) scrollToWheel();
+    beginSpinAudio();
 
     var startRot = rotation;
 
@@ -1556,6 +1643,7 @@ kbd{
   }
 
   function finish() {
+    stopSpinAudio();
     currentOmega = 0;
     spinning = false;
     isStopping = false;
@@ -1646,8 +1734,7 @@ kbd{
 
   if (spinFromEditorBtn) {
     spinFromEditorBtn.addEventListener('click', function () {
-      scrollToWheel();
-      requestSpin();
+      requestSpin(true);
     });
   }
 
