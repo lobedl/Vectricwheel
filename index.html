@@ -1086,9 +1086,6 @@ kbd{
   var spinAudio = {
     context: null,
     master: null,
-    motor: null,
-    motorGain: null,
-    motorFilter: null,
     lastTickAt: 0,
     lastTickIndex: null
   };
@@ -1221,7 +1218,7 @@ kbd{
       if (!spinAudio.context) {
         spinAudio.context = new AudioContextCtor();
         spinAudio.master = spinAudio.context.createGain();
-        spinAudio.master.gain.value = 0.35;
+        spinAudio.master.gain.value = 0.55;
         spinAudio.master.connect(spinAudio.context.destination);
       }
       if (spinAudio.context.state === 'suspended') {
@@ -1234,93 +1231,43 @@ kbd{
     }
   }
 
-  function beginSpinAudio() {
-    var audioContext = spinAudio.context;
-    if (!audioContext || !spinAudio.master) return;
-
-    function startMotor() {
-      if (!spinning || !spinAudio.context || spinAudio.motor) return;
-      try {
-        var now = audioContext.currentTime;
-        var motor = audioContext.createOscillator();
-        var motorFilter = audioContext.createBiquadFilter();
-        var motorGain = audioContext.createGain();
-
-        motor.type = 'sawtooth';
-        motor.frequency.setValueAtTime(72, now);
-        motorFilter.type = 'lowpass';
-        motorFilter.frequency.setValueAtTime(900, now);
-        motorFilter.Q.setValueAtTime(0.7, now);
-        motorGain.gain.setValueAtTime(0.0001, now);
-        motorGain.gain.exponentialRampToValueAtTime(0.035, now + 0.08);
-
-        motor.connect(motorFilter);
-        motorFilter.connect(motorGain);
-        motorGain.connect(spinAudio.master);
-        motor.start(now);
-
-        spinAudio.motor = motor;
-        spinAudio.motorGain = motorGain;
-        spinAudio.motorFilter = motorFilter;
-      } catch (e) {}
-    }
-
-    if (audioContext.state === 'suspended') {
-      var resumePromise = audioContext.resume();
-      if (resumePromise && resumePromise.then) {
-        resumePromise.then(startMotor).catch(function () {});
-      }
-    } else {
-      startMotor();
-    }
-  }
-
-  function updateMotorAudio(omega) {
-    var audioContext = spinAudio.context;
-    if (!audioContext || !spinAudio.motor || !spinAudio.motorGain || !spinAudio.motorFilter) return;
-
-    var speed = Math.min(1, Math.abs(omega) / 18);
-    var now = audioContext.currentTime;
-    var motorGain = 0.025 + speed * 0.09;
-    var motorPitch = 55 + speed * 150;
-
-    spinAudio.motor.frequency.setTargetAtTime(motorPitch, now, 0.035);
-    spinAudio.motorGain.gain.setTargetAtTime(motorGain, now, 0.045);
-    spinAudio.motorFilter.frequency.setTargetAtTime(500 + speed * 1000, now, 0.05);
-  }
-
   function playSpinTick(omega) {
     var audioContext = spinAudio.context;
-    if (!audioContext || !spinAudio.master || audioContext.state !== 'running') return;
+    if (!audioContext || !spinAudio.master) return;
+    if (audioContext.state === 'suspended') {
+      var resumePromise = audioContext.resume();
+      if (resumePromise && resumePromise.catch) resumePromise.catch(function () {});
+      return;
+    }
+    if (audioContext.state !== 'running') return;
 
     var speed = Math.min(1, Math.abs(omega) / 18);
     var now = audioContext.currentTime;
-    var minimumGap = 0.045 + (1 - speed) * 0.095;
+    var minimumGap = 0.04 + (1 - speed) * 0.085;
     if (now - spinAudio.lastTickAt < minimumGap) return;
     spinAudio.lastTickAt = now;
 
     try {
       var oscillator = audioContext.createOscillator();
       var tickGain = audioContext.createGain();
-      var volume = 0.08 + speed * 0.13;
-      var pitch = 520 + speed * 780;
+      var volume = 0.16 + speed * 0.18;
+      var pitch = 680 + speed * 980;
 
-      oscillator.type = 'triangle';
+      oscillator.type = 'square';
       oscillator.frequency.setValueAtTime(pitch, now);
-      oscillator.frequency.exponentialRampToValueAtTime(180, now + 0.055);
+      oscillator.frequency.exponentialRampToValueAtTime(240, now + 0.045);
       tickGain.gain.setValueAtTime(0.0001, now);
-      tickGain.gain.exponentialRampToValueAtTime(volume, now + 0.004);
-      tickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.065);
+      tickGain.gain.exponentialRampToValueAtTime(volume, now + 0.002);
+      tickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.075);
       oscillator.connect(tickGain);
       tickGain.connect(spinAudio.master);
       oscillator.start(now);
-      oscillator.stop(now + 0.07);
+      oscillator.stop(now + 0.08);
     } catch (e) {}
   }
 
   function updateSpinAudio(rot, omega) {
     if (!options.length) return;
-    updateMotorAudio(omega);
     var arc = (Math.PI * 2) / options.length;
     var tickIndex = Math.floor((rot + arc / 2) / arc);
     if (spinAudio.lastTickIndex === null) {
@@ -1331,24 +1278,6 @@ kbd{
       spinAudio.lastTickIndex = tickIndex;
       playSpinTick(omega);
     }
-  }
-
-  function stopSpinAudio() {
-    var audioContext = spinAudio.context;
-    var motor = spinAudio.motor;
-    var motorGain = spinAudio.motorGain;
-    if (!audioContext || !motor || !motorGain) return;
-
-    try {
-      var now = audioContext.currentTime;
-      motorGain.gain.cancelScheduledValues(now);
-      motorGain.gain.setTargetAtTime(0.0001, now, 0.06);
-      motor.stop(now + 0.28);
-    } catch (e) {}
-
-    spinAudio.motor = null;
-    spinAudio.motorGain = null;
-    spinAudio.motorFilter = null;
   }
 
   function setCustomizeOpen(open, shouldScroll) {
@@ -1559,8 +1488,6 @@ kbd{
     resultTxt.textContent = 'Spinning…';
 
     if (shouldScroll) scrollToWheel();
-    beginSpinAudio();
-
     var startRot = rotation;
 
     /* Random duration: 15 to 30 seconds, with a long physical slowdown. */
@@ -1643,7 +1570,6 @@ kbd{
   }
 
   function finish() {
-    stopSpinAudio();
     currentOmega = 0;
     spinning = false;
     isStopping = false;
