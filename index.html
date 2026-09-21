@@ -1690,6 +1690,7 @@ kbd{
 
   if (spinFromEditorBtn) {
     spinFromEditorBtn.addEventListener('click', function () {
+      setCustomizeOpen(false, false);
       requestSpin(true);
     });
   }
