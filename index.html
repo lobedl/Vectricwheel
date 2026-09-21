@@ -1074,6 +1074,9 @@ kbd{
   var adBackdrop          = document.getElementById('fullscreenAdBackdrop');
   var adTimerInterval     = null;
   var isAdActive          = false;
+  var AD_COOLDOWN_MS      = 2 * 60 * 1000;
+  var AD_FIRST_SPIN_KEY   = 'vectricspin.ad.firstSpinShown';
+  var AD_LAST_SHOWN_KEY   = 'vectricspin.ad.lastShownAt';
 
   var options   = [];
   var offscreen = null;
@@ -1317,6 +1320,28 @@ kbd{
     setCustomizeOpen(!isOpen, !isOpen);
   }
 
+  function shouldShowSpinAd() {
+    var firstSpinShown = false;
+    var lastShownAt = 0;
+
+    try {
+      firstSpinShown = sessionStorage.getItem(AD_FIRST_SPIN_KEY) === '1';
+    } catch (e) {}
+
+    if (!firstSpinShown) return true;
+
+    try {
+      lastShownAt = Number(localStorage.getItem(AD_LAST_SHOWN_KEY) || 0);
+    } catch (e) {}
+
+    return !lastShownAt || (Date.now() - lastShownAt) >= AD_COOLDOWN_MS;
+  }
+
+  function recordSpinAdShown() {
+    try { sessionStorage.setItem(AD_FIRST_SPIN_KEY, '1'); } catch (e) {}
+    try { localStorage.setItem(AD_LAST_SHOWN_KEY, String(Date.now())); } catch (e) {}
+  }
+
   function showFullscreenAd(shouldScroll) {
     pendingSpinScroll = Boolean(shouldScroll);
     if (!fullscreenAdOverlay) {
@@ -1392,6 +1417,7 @@ kbd{
     }
 
     if (shouldSpin) {
+      recordSpinAdShown();
       var shouldScroll = pendingSpinScroll;
       pendingSpinScroll = false;
       startActualSpin(shouldScroll);
@@ -1404,7 +1430,11 @@ kbd{
     if (spinning) return;
     shouldScroll = shouldScroll === true;
     primeSpinAudio();
-    showFullscreenAd(shouldScroll);
+    if (shouldShowSpinAd()) {
+      showFullscreenAd(shouldScroll);
+    } else {
+      startActualSpin(shouldScroll);
+    }
   }
 
   function getShareUrl() {
