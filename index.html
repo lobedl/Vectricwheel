@@ -1205,7 +1205,7 @@ kbd{
     var rect = wheelStage.getBoundingClientRect();
     var headerH = 80;
     if (rect.top >= headerH && rect.bottom <= window.innerHeight) return;
-    wheelStage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+     wheelStage.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   /*
